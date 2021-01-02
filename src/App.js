@@ -1,85 +1,56 @@
-import { useState, useRef, Suspense } from 'react';
-import { TextureLoader } from 'three';
-import { Canvas, useThree, extend, useFrame, useLoader } from 'react-three-fiber';
-import { a, useSpring } from 'react-spring/three';
-import { OrbitControls, Torus } from 'drei';
-import imageUrl from './nasaLogo.png';
+import * as THREE from "three";
+import React, { useState, useRef, useEffect } from "react";
+import { OrbitControls } from "drei";
+import { Canvas, useFrame } from "react-three-fiber";
+import "./App.css";
 
-import './App.css';
+const tempObject = new THREE.Object3D();
 
-function Plane(props) {
-  return (
-    <mesh receiveShadow={true} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, -1]}>
-      <planeBufferGeometry attach='geometry' args={[10, 10]} />
-      <meshStandardMaterial attach='material' color='green' />
-    </mesh>
-  )
-}
-
-function Cube(props) {
-  const [isBig, setIsBig] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+function Boxes() {
   const ref = useRef();
 
   useFrame(() => {
-    ref.current.rotation.x += 0.01
+    ref.current.rotation.y += 0.002;
+
+    let i = 0;
+    for (let x = 0; x < 5; x++) {
+      for (let y = 0; y < 5; y++) {
+        for (let z = 0; z < 5; z++) {
+          const id = i++;
+          tempObject.position.set(x * 2, y * 2, z * 2);
+          tempObject.updateMatrix();
+          ref.current.setMatrixAt(id, tempObject.matrix);
+        }
+      }
+    }
   });
-
-  const { size, x } = useSpring({
-    size: isBig ? [2, 2, 2] : [1, 1, 1],
-    x: isBig ? 2 : 0
-  });
-
-  const texture = useLoader(TextureLoader, imageUrl)
-
-  const color = isHovered ? 'red' : 'salmon';
 
   return (
-    <a.mesh 
-      {...props}
-      ref={ref}
-      scale={size}
-      position-x={x}
-      castShadow={true}
-      receiveShadow={true}
-      onClick={() => setIsBig(!isBig)}
-      onPointerOut={() => setIsHovered(false)}
-      onPointerOver={() => setIsHovered(true)}
-    >
-      <boxBufferGeometry attach='geometry' args={[1, 1, 1]} />
-      <meshStandardMaterial map={texture} attach='material' color={color} />
-    </a.mesh>
-  )
+    <instancedMesh ref={ref} args={[null, null, 1000]}>
+      <boxBufferGeometry attach="geometry" args={[0.7, 0.7, 0.7]} />
+      <meshPhongMaterial attach="material" color="red" />
+    </instancedMesh>
+  );
 }
 
 function Scene() {
   return (
     <>
       <ambientLight />
-      <pointLight castShadow={true} intensity={0.6} position={[0, 4, 5]} />
-      <Suspense fallback={null}>
-        <Cube rotation={[10, 10, 5]} position={[0, 0, 0]} />
-        <Torus args={[1, 0.2, 10, 20]} position={[0, 1.6, 0]} scale={[0.6, 0.6, 0.6]}>
-          <meshPhongMaterial
-            roughness={1}
-            metalness={0.5}
-            shininess={100}
-            attach='material'
-            color={'blue'}
-          />
-        </Torus>
-      </Suspense>
-      <Plane />
+      <pointLight intensity={0.6} position={[0, 10, 4]} />
+      <Boxes />
       <OrbitControls />
     </>
-  )
+  );
 }
 
 function App() {
   return (
-    <Canvas shadowMap={true}>
-      <Scene />
-    </Canvas>
+    <>
+      <Canvas>
+        <Scene />
+      </Canvas>
+    </>
   );
 }
 
