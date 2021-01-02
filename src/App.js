@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useState, useRef, useEffect } from "react";
-import { OrbitControls } from "drei";
+import { OrbitControls, Sphere } from "drei";
 import { Canvas, useFrame } from "react-three-fiber";
 import "./App.css";
 
@@ -10,7 +10,7 @@ function Boxes() {
   const ref = useRef();
 
   useFrame(() => {
-    // ref.current.rotation.x += 0.002;
+    ref.current.rotation.x += 0.002;
     ref.current.rotation.y += 0.002;
 
     // let i = 0;
@@ -24,9 +24,9 @@ function Boxes() {
     //     }
     //   }
     // }
-    for (let i = 0; i < 10000; i ++) {
+    for (let i = 0; i < 100000; i ++) {
           // const id = i++;
-          tempObject.position.set(Math.random() * 30 - 15, Math.random() * 30 - 15, Math.random() * 30 - 15);
+          tempObject.position.set(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10);
           tempObject.updateMatrix();
           ref.current.setMatrixAt(i, tempObject.matrix);
         }
@@ -34,16 +34,10 @@ function Boxes() {
 
   return (
     <instancedMesh ref={ref} args={[null, null, 1000]}>
-      <boxBufferGeometry attach="geometry" args={[0.2, 0.2, 2.14]} />
+      <boxBufferGeometry attach="geometry" args={[0.8, 0.8, 0.8]} />
       <meshPhongMaterial attach="material" color="red" />
     </instancedMesh>
   );
-}
-
-function Spehere() {
-  return (
-    
-  )
 }
 
 function Scene() {
@@ -52,6 +46,9 @@ function Scene() {
       <ambientLight />
       <pointLight intensity={0.6} position={[0, 10, 4]} />
       <Boxes />
+      <Sphere args={[0.5, 32, 32]}>
+        <meshBasicMaterial attach="material" color="hotpink" />
+      </Sphere>
       <OrbitControls />
     </>
   );
