@@ -9,8 +9,10 @@ const tempObject = new THREE.Object3D();
 function Boxes() {
   const ref = useRef();
 
+  console.log(ref);
+
   useFrame(() => {
-    ref.current.rotation.x += 0.002;
+    // ref.current.rotation.x += 0.002;
     ref.current.rotation.y += 0.002;
 
     // let i = 0;
@@ -24,9 +26,10 @@ function Boxes() {
     //     }
     //   }
     // }
-    for (let i = 0; i < 100000; i ++) {
+    for (let i = 0; i < 1000; i ++) {
           // const id = i++;
           tempObject.position.set(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10);
+          tempObject.rotation.set(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI);
           tempObject.updateMatrix();
           ref.current.setMatrixAt(i, tempObject.matrix);
         }
@@ -34,7 +37,7 @@ function Boxes() {
 
   return (
     <instancedMesh ref={ref} args={[null, null, 1000]}>
-      <boxBufferGeometry attach="geometry" args={[0.8, 0.8, 0.8]} />
+      <torusBufferGeometry attach="geometry" args={[0.15, 0.15, 12, 36]} />
       <meshPhongMaterial attach="material" color="red" />
     </instancedMesh>
   );
