@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useState, useRef, useEffect } from "react";
-import { OrbitControls, Sphere } from "drei";
+import { OrbitControls, Sphere, RoundedBox } from "drei";
 import { Canvas, useFrame } from "react-three-fiber";
 import "./App.css";
 
@@ -8,8 +8,6 @@ const tempObject = new THREE.Object3D();
 
 function Boxes() {
   const ref = useRef();
-
-  console.log(ref);
 
   useFrame(() => {
     // ref.current.rotation.x += 0.002;
@@ -27,9 +25,8 @@ function Boxes() {
     //   }
     // }
     for (let i = 0; i < 1000; i ++) {
-          // const id = i++;
           tempObject.position.set(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10);
-          tempObject.rotation.set(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI);
+          // tempObject.rotation.set(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI);
           tempObject.updateMatrix();
           ref.current.setMatrixAt(i, tempObject.matrix);
         }
@@ -37,8 +34,9 @@ function Boxes() {
 
   return (
     <instancedMesh ref={ref} args={[null, null, 1000]}>
-      <torusBufferGeometry attach="geometry" args={[0.15, 0.15, 12, 36]} />
-      <meshPhongMaterial attach="material" color="red" />
+      {/* <torusBufferGeometry attach="geometry" args={[0.15, 0.15, 12, 36]} /> */}
+      <boxBufferGeometry attach="geometry" args={[0.4, 0.4, 0.4]} />
+      <meshStandardMaterial attach="material" color="red" />
     </instancedMesh>
   );
 }
@@ -60,7 +58,7 @@ function Scene() {
 function App() {
   return (
     <>
-      <Canvas>
+      <Canvas camera={{ position: [0, 0, 6] }}>
         <Scene />
       </Canvas>
     </>
