@@ -1,8 +1,11 @@
 import * as THREE from "three";
-import React, { useState, useRef, useEffect, Suspense } from "react";
-import { OrbitControls, Sphere, RoundedBox } from "drei";
+import React, { useState, useRef, Suspense } from "react";
+import { OrbitControls, Sphere } from "drei";
 import { Canvas, useFrame, useLoader } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { shipPositionState, laserPositionState } from "./gameState";
+
 import "./App.css";
 
 const tempObject = new THREE.Object3D();
@@ -48,7 +51,8 @@ function Loading() {
 }
 
 function ArWing() {
-  const [shipPosition, setShipPosition] = useState();
+  const [shipPosition, setShipPosition] = useRecoilState(shipPositionState);
+
   const ship = useRef();
   useFrame(({ mouse }) => {
     setShipPosition({
@@ -116,19 +120,68 @@ function Target() {
   );
 }
 
+// Draws all of the lasers existing in state.
+function Lasers() {
+  const lasers = useRecoilValue(laserPositionState);
+  return (
+    <group>
+      {lasers.map((laser) => (
+        <mesh position={[laser.x, laser.y, laser.z]} key={`${laser.id}`}>
+          <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+          <meshStandardMaterial attach="material" emissive="white" />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+// An invisible clickable element in the front of the scene.
+// Manages creating lasers with the correct initial velocity on click.
+function LaserController() {
+  const shipPosition = useRecoilValue(shipPositionState);
+  const [lasers, setLasers] = useRecoilState(laserPositionState);
+  return (
+    <mesh
+      position={[0, 0, -8]}
+      onClick={() =>
+        setLasers([
+          ...lasers,
+          {
+            id: Math.random(), // This needs to be unique.. Random isn't perfect but it works. Could use a uuid here.
+            x: 0,
+            y: 0,
+            z: 0,
+            velocity: [shipPosition.rotation.x * 6, shipPosition.rotation.y * 5]
+          }
+        ])
+      }
+    >
+      <planeBufferGeometry attach="geometry" args={[100, 100]} />
+      <meshStandardMaterial
+        attach="material"
+        color="orange"
+        emissive="#ff0860"
+        visible={false}
+      />
+    </mesh>
+  );
+}
+
 function Scene() {
   return (
     <>
       <ambientLight />
       <pointLight intensity={0.6} position={[0, 10, 4]} />
-      <Boxes />
       <Suspense fallback={<Loading />}>
         <ArWing />
-        <Target />
         <Sphere args={[0.5, 32, 32]}>
           <meshBasicMaterial attach="material" color="hotpink" />
         </Sphere>
       </Suspense>
+      <Boxes />
+      <Target />
+      <Lasers />
+      <LaserController />
       {/* <OrbitControls /> */}
     </>
   );
@@ -138,7 +191,9 @@ function App() {
   return (
     <>
       <Canvas camera={{ position: [0, 0, 7] }}>
-        <Scene />
+        <RecoilRoot>
+          <Scene />
+        </RecoilRoot>
       </Canvas>
     </>
   );
