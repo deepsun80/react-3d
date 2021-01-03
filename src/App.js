@@ -122,16 +122,12 @@ function Target() {
 
 // Draws all of the lasers existing in state.
 function Lasers() {
-  const lasers = useRecoilValue(laserPositionState);
+  const laser = useRecoilValue(laserPositionState);
   return (
-    <group>
-      {lasers.map((laser) => (
-        <mesh position={[laser.x, laser.y, laser.z]} key={`${laser.id}`}>
-          <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-          <meshStandardMaterial attach="material" emissive="white" />
-        </mesh>
-      ))}
-    </group>
+    laser.isVisible && <mesh position={[laser.position.x, laser.position.y, laser.position.z]}>
+      <boxBufferGeometry attach="geometry" args={[0.5, 0.5, 0.5]} />
+      <meshStandardMaterial attach="material" emissive="white" />
+    </mesh>
   );
 }
 
@@ -139,21 +135,19 @@ function Lasers() {
 // Manages creating lasers with the correct initial velocity on click.
 function LaserController() {
   const shipPosition = useRecoilValue(shipPositionState);
-  const [lasers, setLasers] = useRecoilState(laserPositionState);
+  const [laser, setLasers] = useRecoilState(laserPositionState);
   return (
     <mesh
       position={[0, 0, -8]}
       onClick={() =>
-        setLasers([
-          ...lasers,
-          {
-            id: Math.random(), // This needs to be unique.. Random isn't perfect but it works. Could use a uuid here.
-            x: 0,
-            y: 0,
-            z: 0,
-            velocity: [shipPosition.rotation.x * 6, shipPosition.rotation.y * 5]
-          }
-        ])
+        {!laser.isVisible && setLasers({
+          position: {
+            x: shipPosition.position.x,
+            y: shipPosition.position.y,
+            z: 3
+          },
+          isVisible: true
+        })}
       }
     >
       <planeBufferGeometry attach="geometry" args={[100, 100]} />

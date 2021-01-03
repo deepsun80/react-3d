@@ -12,7 +12,7 @@ export const shipPositionState = atom({
 
 export const laserPositionState = atom({
  key: "laserPositions", // unique ID (with respect to other atoms/selectors)
- default: [], // default value (aka initial value)
+ default: { position: {}, isVisible: false },// default value (aka initial value)
 });
 
 export const scoreState = atom({
