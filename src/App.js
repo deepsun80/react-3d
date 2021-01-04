@@ -38,6 +38,22 @@ function Boxes() {
   );
 }
 
+function Cylinder() {
+  const cylinder = useRef();
+
+  useFrame(() => {
+    // cubes.current.rotation.x += 0.003;
+    cylinder.current.rotation.y = Math.PI / 2;
+  });
+
+  return (
+    <mesh ref={cylinder}>
+      <cylinderBufferGeometry attach="geometry" args={[5, 5, 20, 32 ]} />
+      <meshStandardMaterial attach="material" color="white" wireframe/>
+    </mesh>
+  );
+}
+
 function Loading() {
   return (
     <mesh visible position={[0, 0, 0]} rotation={[0, 0, 0]}>
@@ -95,34 +111,34 @@ function ArWing() {
 
 // Draws two sprites in front of the ship, indicating the direction of fire.
 // Uses a TextureLoader to load transparent PNG, and sprite to render on a 2d plane facing the camera.
-// function Target() {
-//   // Create refs for the two sprites we will create.
-//   const target = useRef();
+function Target() {
+  // Create refs for the two sprites we will create.
+  const target = useRef();
 
-//   const loader = new THREE.TextureLoader();
-//   // A png with transparency to use as the target sprite.
-//   const texture = loader.load("/target.png");
+  const loader = new THREE.TextureLoader();
+  // A png with transparency to use as the target sprite.
+  const texture = loader.load("/target.png");
 
-//   // Update the position of both sprites based on the mouse x and y position. The front target has a larger scalar.
-//   // Its movement in both axis is exagerated since its farther in front. The end result should be the appearance that the
-//   // two targets are aligned with the ship in the direction of laser fire.
-//   useFrame(({ mouse }) => {
-//     target.current.position.y = -mouse.y * 0.5;
-//     target.current.position.x = -mouse.x * 0.5;
-//     target.current.position.z = 0.5;
-//     target.current.scale.x = 0.5;
-//     target.current.scale.y = 0.5;
-//   });
-//   // Return a group containing two sprites. One positioned eight units in front of the ship, and the other 16 in front.
-//   // We give the spriteMaterial a map prop with the loaded sprite texture as a value/
-//   return (
-//     <group>
-//       <sprite position={[0, 0, -8]} ref={target}>
-//         <spriteMaterial attach="material" map={texture} />
-//       </sprite>
-//     </group>
-//   );
-// }
+  // Update the position of both sprites based on the mouse x and y position. The front target has a larger scalar.
+  // Its movement in both axis is exagerated since its farther in front. The end result should be the appearance that the
+  // two targets are aligned with the ship in the direction of laser fire.
+  useFrame(({ mouse }) => {
+    target.current.position.y = -mouse.y * 0.5;
+    target.current.position.x = -mouse.x * 0.5;
+    target.current.position.z = 0.5;
+    target.current.scale.x = 0.5;
+    target.current.scale.y = 0.5;
+  });
+  // Return a group containing two sprites. One positioned eight units in front of the ship, and the other 16 in front.
+  // We give the spriteMaterial a map prop with the loaded sprite texture as a value/
+  return (
+    <group>
+      <sprite position={[0, 0, -8]} ref={target}>
+        <spriteMaterial attach="material" map={texture} />
+      </sprite>
+    </group>
+  );
+}
 
 // Draws all of the lasers existing in state.
 function Lasers() {
@@ -255,9 +271,10 @@ function Scene() {
       <Suspense fallback={<Loading />}>
         <ArWing />
       </Suspense>
-      <Boxes />
-      <Enemy />
-      {/* <Target /> */}
+      {/* <Boxes /> */}
+      <Cylinder />
+      {/* <Enemy /> */}
+      <Target />
       <Lasers />
       <LaserController />
       <GameTimer />
