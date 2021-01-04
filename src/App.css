@@ -12,5 +12,5 @@ body,
 }
 
 body {
-  background: blue;
+  background: radial-gradient(circle at 50%, black 20%, blue 80%, darkred);
 }

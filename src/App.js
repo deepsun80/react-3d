@@ -9,9 +9,25 @@ import './App.css';
 
 function Plane(props) {
   return (
-    <mesh receiveShadow={true} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, -1]}>
-      <planeBufferGeometry attach='geometry' args={[10, 10]} />
-      <meshStandardMaterial attach='material' color='green' />
+    <mesh receiveShadow={true} rotation={[0, 0, 0]} position={[0, 0, 0]}>
+      <planeBufferGeometry attach='geometry' args={[10, 10]}  />
+      <meshStandardMaterial attach='material' color='green' wireframe />
+    </mesh>
+  )
+}
+
+function Cylinder() {
+  const cylinderRef = useRef();
+
+  useFrame(() => {
+    cylinderRef.current.position.z += 0.05;
+    cylinderRef.current.rotation.x = Math.PI / 2;;
+  });
+
+  return (
+    <mesh receiveShadow={true} position={[0, 0, -1000]} ref={cylinderRef}>
+      <cylinderBufferGeometry attach='geometry' args={[5, 5, 2000, 32, 2000]} openEnded/>
+      <meshStandardMaterial attach='material' color='white' wireframe/>
     </mesh>
   )
 }
@@ -58,7 +74,7 @@ function Scene() {
       <ambientLight />
       <pointLight castShadow={true} intensity={0.6} position={[0, 4, 5]} />
       <Suspense fallback={null}>
-        <Cube rotation={[10, 10, 5]} position={[0, 0, 0]} />
+        {/* <Cube rotation={[10, 10, 5]} position={[0, 0, 0]} />
         <Torus args={[1, 0.2, 10, 20]} position={[0, 1.6, 0]} scale={[0.6, 0.6, 0.6]}>
           <meshPhongMaterial
             roughness={1}
@@ -67,9 +83,10 @@ function Scene() {
             attach='material'
             color={'blue'}
           />
-        </Torus>
+        </Torus> */}
+        <Cylinder />
       </Suspense>
-      <Plane />
+      {/* <Plane /> */}
       <OrbitControls />
     </>
   )
@@ -77,7 +94,7 @@ function Scene() {
 
 function App() {
   return (
-    <Canvas shadowMap={true}>
+    <Canvas>
       <Scene />
     </Canvas>
   );
