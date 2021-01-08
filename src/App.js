@@ -4,15 +4,122 @@ import { Canvas, useThree, extend, useFrame, useLoader } from 'react-three-fiber
 import { a, useSpring } from 'react-spring/three';
 import { OrbitControls, Torus } from 'drei';
 import imageUrl from './nasaLogo.png';
+import planeImg from './hexagonPattern.png';
+import planeImgAlpha from './hexagonPatternAlpha.png';
 
 import './App.css';
 
-function Plane(props) {
+function PlaneTop(props) {
+  const planeRef = useRef();
+  const planeRef2 = useRef();
+  const planeRef3 = useRef();
+  const planeRef4 = useRef();
+  const planeRef5 = useRef();
+  const planeRef6 = useRef();
+
+  const texturePlane = useLoader(TextureLoader, planeImg);
+  const texturePlaneAlpha = useLoader(TextureLoader, planeImgAlpha);
+
+  useFrame(() => {
+    planeRef.current.position.z += 0.02;
+    planeRef2.current.position.z += 0.02;
+    planeRef3.current.position.z += 0.02;
+    planeRef4.current.position.z += 0.02;
+    planeRef5.current.position.z += 0.02;
+    planeRef6.current.position.z += 0.02;
+
+    planeRef.current.rotation.x = Math.PI / 2;
+    planeRef2.current.rotation.x = Math.PI / 2;
+    planeRef3.current.rotation.x = Math.PI / 2;
+    planeRef4.current.rotation.x = Math.PI / 2;
+    planeRef5.current.rotation.x = Math.PI / 2;
+    planeRef6.current.rotation.x = Math.PI / 2;
+  });
+
   return (
-    <mesh receiveShadow={true} rotation={[0, 0, 0]} position={[0, 0, 0]}>
-      <planeBufferGeometry attach='geometry' args={[10, 10]}  />
-      <meshStandardMaterial attach='material' color='green' wireframe />
-    </mesh>
+    <>
+      <mesh receiveShadow={true} position={[0, 2.0, -48]} ref={planeRef}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={1} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, 2.1, -48]} ref={planeRef2}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.25} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, 2.2, -48]} ref={planeRef3}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.2} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, 2.3, -48]} ref={planeRef4}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.15} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, 2.4, -48]} ref={planeRef5}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.1} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, 2.5, -48]} ref={planeRef6}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.05} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+  </>
+  )
+}
+
+function PlaneBottom(props) {
+  const planeRef = useRef();
+  const planeRef2 = useRef();
+  const planeRef3 = useRef();
+  const planeRef4 = useRef();
+  const planeRef5 = useRef();
+  const planeRef6 = useRef();
+
+  const texturePlane = useLoader(TextureLoader, planeImg);
+  const texturePlaneAlpha = useLoader(TextureLoader, planeImgAlpha);
+
+  useFrame(() => {
+    planeRef.current.position.z += 0.02;
+    planeRef2.current.position.z += 0.02;
+    planeRef3.current.position.z += 0.02;
+    planeRef4.current.position.z += 0.02;
+    planeRef5.current.position.z += 0.02;
+    planeRef6.current.position.z += 0.02;
+
+    planeRef.current.rotation.x = - Math.PI / 2;
+    planeRef2.current.rotation.x = - Math.PI / 2;
+    planeRef3.current.rotation.x = - Math.PI / 2;
+    planeRef4.current.rotation.x = - Math.PI / 2;
+    planeRef5.current.rotation.x = - Math.PI / 2;
+    planeRef6.current.rotation.x = - Math.PI / 2;
+  });
+
+  return (
+    <>
+      <mesh receiveShadow={true} position={[0, -2.0, -48]} ref={planeRef}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={1} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, -2.1, -48]} ref={planeRef2}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.25} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, -2.2, -48]} ref={planeRef3}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.2} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, -2.3, -48]} ref={planeRef4}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.15} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, -2.4, -48]} ref={planeRef5}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.1} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} position={[0, -2.5, -48]} ref={planeRef6}>
+        <planeBufferGeometry attach='geometry' args={[100, 100, 50, 50]}  />
+        <meshStandardMaterial opacity={0.05} map={texturePlane} alphaMap={texturePlaneAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+  </>
   )
 }
 
@@ -84,9 +191,10 @@ function Scene() {
             color={'blue'}
           />
         </Torus> */}
-        <Cylinder />
+        <PlaneTop />
+        <PlaneBottom />
+        {/* <Cylinder /> */}
       </Suspense>
-      {/* <Plane /> */}
       <OrbitControls />
     </>
   )
