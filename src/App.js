@@ -3,9 +3,9 @@ import { TextureLoader } from 'three';
 import { Canvas, useThree, extend, useFrame, useLoader } from 'react-three-fiber';
 import { a, useSpring } from 'react-spring/three';
 import { OrbitControls, Torus } from 'drei';
-import imageUrl from './nasaLogo.png';
 import planeImg from './hexagonPattern.png';
 import planeImgAlpha from './hexagonPatternAlpha.png';
+import sphereImg from './hexagonPatternBW.png';
 
 import './App.css';
 
@@ -123,19 +123,39 @@ function PlaneBottom(props) {
   )
 }
 
-function Cylinder() {
-  const cylinderRef = useRef();
+function Sphere() {
+  const sphereRef = useRef();
+  const sphereRef2 = useRef();
+  const sphereRef3 = useRef();
+
+  const textureSphere = useLoader(TextureLoader, planeImg);
+  const textureSphereAlpha = useLoader(TextureLoader, planeImgAlpha);
 
   useFrame(() => {
-    cylinderRef.current.position.z += 0.05;
-    cylinderRef.current.rotation.x = Math.PI / 2;;
+    sphereRef.current.rotation.y += 0.005;
+    sphereRef2.current.rotation.y += 0.005;
+    sphereRef3.current.rotation.y += 0.005;
+
+    sphereRef.current.position.z += 0.05;
+    sphereRef2.current.position.z += 0.05;
+    sphereRef3.current.position.z += 0.05;
   });
 
   return (
-    <mesh receiveShadow={true} position={[0, 0, -1000]} ref={cylinderRef}>
-      <cylinderBufferGeometry attach='geometry' args={[5, 5, 2000, 32, 2000]} openEnded/>
-      <meshStandardMaterial attach='material' color='white' wireframe/>
-    </mesh>
+    <>
+      <mesh receiveShadow={true} position={[-2, 0, -40]} ref={sphereRef}>
+        <sphereBufferGeometry attach='geometry' args={[10, 16, 16]} />
+        <meshStandardMaterial opacity={1} map={textureSphere} alphaMap={textureSphereAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} scale={[0.90, 0.90, 0.90]} position={[-2, 0, -40]} ref={sphereRef2}>
+        <sphereBufferGeometry attach='geometry' args={[10, 32, 32]} />
+        <meshStandardMaterial opacity={0.5} map={textureSphere} alphaMap={textureSphereAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+      <mesh receiveShadow={true} scale={[0.80, 0.80, 0.80]} position={[-2, 0, -40]} ref={sphereRef3}>
+        <sphereBufferGeometry attach='geometry' args={[10, 32, 32]} />
+        <meshStandardMaterial opacity={0.3} map={textureSphere} alphaMap={textureSphereAlpha} attach='material' color='white' transparent depthWrite={false} />
+      </mesh>
+    </>
   )
 }
 
@@ -153,7 +173,7 @@ function Cube(props) {
     x: isBig ? 2 : 0
   });
 
-  const texture = useLoader(TextureLoader, imageUrl)
+  const texture = useLoader(TextureLoader, sphereImg);
 
   const color = isHovered ? 'red' : 'salmon';
 
@@ -191,6 +211,7 @@ function Scene() {
             color={'blue'}
           />
         </Torus> */}
+        <Sphere />
         <PlaneTop />
         <PlaneBottom />
         {/* <Cylinder /> */}
