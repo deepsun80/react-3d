@@ -7,7 +7,11 @@ export const shipPositionState = atom({
 
 export const enemyPositionState = atom({
  key: "enemyPosition", // unique ID (with respect to other atoms/selectors)
- default: [{ x: 0, y: 0, z: -16 }], // default value (aka initial value)
+ default: [
+   { x: -1, y: 0, z: -10 },
+   { x: 2, y: 0, z: -30 },
+   { x: -5, y: 0, z: -50 },
+ ], // default value (aka initial value)
 });
 
 export const laserPositionState = atom({
@@ -17,5 +21,10 @@ export const laserPositionState = atom({
 
 export const scoreState = atom({
  key: "score", // unique ID (with respect to other atoms/selectors)
- default: 0, // default value (aka initial value)
+ default: 1, // default value (aka initial value)
+});
+
+export const delayState = atom({
+ key: "delay",
+ default: true,
 });
