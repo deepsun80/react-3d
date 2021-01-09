@@ -23,8 +23,3 @@ export const scoreState = atom({
  key: "score", // unique ID (with respect to other atoms/selectors)
  default: 1, // default value (aka initial value)
 });
-
-export const delayState = atom({
- key: "delay",
- default: true,
-});
