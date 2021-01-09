@@ -64,6 +64,16 @@ function GameLogic({
        }))
        .filter((laser) => laser.z > -laserRange && laser.y > groundHeight)
    );
+
+   //Remove lasers that have hit enemies
+   lasers
+     .map((laser, idx) => {
+      enemies.forEach(enemy => {
+       if (getDistance(enemy, laser) < distanceVar) {
+        return setLaserPositions(lasers.slice(idx + 1, lasers.length))
+       } else return null
+      });
+     }); 
  });
  return null;
 }
