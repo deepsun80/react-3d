@@ -18,7 +18,7 @@ import {
   LASER_Z_VELOCITY,
   ENEMY_SPEED,
   GROUND_HEIGHT,
-  distance  
+  getDistance,
 } from './helpers';
 
 import "./App.css";
@@ -38,7 +38,7 @@ function Scene() {
       <Lasers />
       <LaserController />
       <GameLogic 
-        distance={distance}
+        getDistance={getDistance}
         distanceVar={3} 
         enemySpeed={ENEMY_SPEED}
         laserZVelocity={LASER_Z_VELOCITY} 

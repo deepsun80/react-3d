@@ -4,7 +4,7 @@ import { shipPositionState, laserPositionState, enemyPositionState, scoreState }
 
 // This component runs game logic on each frame draw to update game state.
 function GameLogic({
-  distance,
+  getDistance,
   distanceVar, 
   enemySpeed, 
   laserZVelocity, 
@@ -24,7 +24,7 @@ function GameLogic({
          (enemy) =>
            lasers.filter(
              (laser) =>
-               lasers.filter((laser) => distance(laser, enemy) < distanceVar).length > 0
+               lasers.filter((laser) => getDistance(laser, enemy) < distanceVar).length > 0
            ).length > 0
        )
      : [];
@@ -44,7 +44,7 @@ function GameLogic({
    //Player hit
    enemies
      .map((enemy, idx) => {
-       if (distance(shipPosition.position, enemy) < distanceVar) {
+       if (getDistance(shipPosition.position, enemy) < distanceVar) {
            console.log("Player hit");
            return setEnemies(
              enemies.slice(idx + 1, enemies.length)
