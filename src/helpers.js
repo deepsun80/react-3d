@@ -3,6 +3,7 @@ const LASER_RANGE = 100;
 const LASER_Z_VELOCITY = 1;
 const ENEMY_SPEED = 0.1;
 const GROUND_HEIGHT = -50;
+const TEXT_POS = { x: window.innerWidth * .0035, y: 3.4 };
 
 // A helper function to calculate the distance between two points in 3d space.
 // Used to detect lasers intersecting with enemies.
@@ -26,6 +27,7 @@ export {
  LASER_Z_VELOCITY,
  ENEMY_SPEED,
  GROUND_HEIGHT,
+ TEXT_POS,
  getDistance,
  getRandom
 };

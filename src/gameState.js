@@ -10,6 +10,11 @@ const createEnemies = (max) => {
  return enemyArray;
 }
 
+export const gameState = atom({
+ key: "game",
+ default: false
+})
+
 export const shipPositionState = atom({
  key: "shipPosition", // unique ID (with respect to other atoms/selectors)
  default: { position: {}, rotation: {} }, // default value (aka initial value)
@@ -27,7 +32,7 @@ export const laserPositionState = atom({
 
 export const scoreState = atom({
  key: "score", // unique ID (with respect to other atoms/selectors)
- default: 1, // default value (aka initial value)
+ default: 0, // default value (aka initial value)
 });
 
 export const missedEnemiesState = atom({

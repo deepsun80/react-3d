@@ -1,6 +1,7 @@
 import { useFrame } from "react-three-fiber";
-import { useRecoilState } from "recoil";
-import { 
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+ gameState, 
  shipPositionState, 
  laserPositionState, 
  enemyPositionState, 
@@ -17,11 +18,13 @@ function GameLogic({
   laserRange, 
   groundHeight 
 }) {
+ const [game, setGame] = useRecoilState(gameState);
  const [enemies, setEnemies] = useRecoilState(enemyPositionState);
  const [lasers, setLaserPositions] = useRecoilState(laserPositionState);
  const [score, setScore] = useRecoilState(scoreState);
  const [shipPosition] = useRecoilState(shipPositionState);
  const [missed, setMissed] = useRecoilState(missedEnemiesState);
+ const isMissed = useRecoilValue(missedEnemiesState);
 
  useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
@@ -89,17 +92,11 @@ function GameLogic({
      }); 
    });
 
-   //Track missed enemies
-   if (enemies.length > 0) {
-    enemies.forEach(enemy => {
-     if (enemy.z >= 0 && enemies.includes(enemy)) {
-      console.log("enemy missed", missed.length);
-     }
-    })
+   // Game over 
+   if (isMissed.length >= 5) {
+    setGame(true);
    }
 
-   // Game over 
-   if (missed.length >= 5) console.log("Game over");
  return null;
 }
 

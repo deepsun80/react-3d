@@ -1,13 +1,16 @@
 import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 
 import {
   Enemies,
   GameLogic,
+  GameOverText,
   LaserController, 
   Lasers, 
-  Loading, 
+  Loading,
+  MissedText,
+  ScoreText,
   Ship, 
   Target, 
   Terrain 
@@ -18,6 +21,7 @@ import {
   LASER_Z_VELOCITY,
   ENEMY_SPEED,
   GROUND_HEIGHT,
+  TEXT_POS,
   getDistance,
 } from './helpers';
 
@@ -29,6 +33,9 @@ function Scene() {
       <ambientLight intensity={0.1} />
       {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
       <directionalLight intensity={1} />
+      <MissedText txtPos={TEXT_POS} />
+      <ScoreText txtPos={TEXT_POS} />
+      <GameOverText />
       <Suspense fallback={<Loading />}>
         <Ship />
       </Suspense>
