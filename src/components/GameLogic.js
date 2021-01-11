@@ -94,7 +94,7 @@ function GameLogic({
 
    // Game over 
    if (isMissed.length >= 5) {
-    setGame(true);
+    setGame(false);
    }
 
  return null;

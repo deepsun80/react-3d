@@ -7,6 +7,7 @@ import Loading from './Loading';
 import MissedText from './MissedText';
 import ScoreText from './ScoreText';
 import Ship from './Ship';
+import StartScreen from './StartScreen';
 import Target from './Target';
 import Terrain from './Terrain';
 
@@ -20,6 +21,7 @@ export {
  MissedText,
  ScoreText,
  Ship, 
+ StartScreen,
  Target, 
  Terrain 
 }
