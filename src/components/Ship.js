@@ -16,12 +16,14 @@ function Ship() {
  });
  // Update the ships position from the updated state.
  useFrame(() => {
-   ship.current.rotation.z = shipPosition.rotation.z;
-   ship.current.rotation.y = shipPosition.rotation.x;
-   ship.current.rotation.x = shipPosition.rotation.y;
-   ship.current.position.y = shipPosition.position.y;
-   ship.current.position.x = shipPosition.position.x;
-   ship.current.position.z = shipPosition.position.z;
+   if (ship && ship.current) {
+    ship.current.rotation.z = shipPosition.rotation.z;
+    ship.current.rotation.y = shipPosition.rotation.x;
+    ship.current.rotation.x = shipPosition.rotation.y;
+    ship.current.position.y = shipPosition.position.y;
+    ship.current.position.x = shipPosition.position.x;
+    ship.current.position.z = shipPosition.position.z;
+   }
  });
 
  const { nodes } = useLoader(GLTFLoader, "/arwing.glb");

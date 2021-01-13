@@ -5,7 +5,7 @@ import { getRandom } from "./helpers";
 const createEnemies = (max) => {
  let enemyArray = [];
  for (let i = 0; i < max; i ++) {
-  enemyArray = [{ x: getRandom(-15, 15), y: getRandom(-8, 8), z: getRandom(-10, -50) }, ...enemyArray];
+  enemyArray = [{ x: getRandom(-15, 15), y: getRandom(-8, 8), z: getRandom(-10, -500) }, ...enemyArray];
  }
  return enemyArray;
 }
@@ -22,7 +22,7 @@ export const shipPositionState = atom({
 
 export const enemyPositionState = atom({
  key: "enemyPosition", // unique ID (with respect to other atoms/selectors)
- default: createEnemies(5), // default value (aka initial value)
+ default: createEnemies(150), // default value (aka initial value)
 });
 
 export const enemyDestroyedState = atom({

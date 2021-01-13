@@ -17,11 +17,14 @@ function Target() {
  // Its movement in both axis is exagerated since its farther in front. The end result should be the appearance that the
  // two targets are aligned with the ship in the direction of laser fire.
  useFrame(({ mouse }) => {
-   rearTarget.current.position.y = -mouse.y * 10;
-   rearTarget.current.position.x = -mouse.x * 30;
-
-   frontTarget.current.position.y = -mouse.y * 20;
-   frontTarget.current.position.x = -mouse.x * 60;
+   if (rearTarget && rearTarget.current) {
+    rearTarget.current.position.y = -mouse.y * 10;
+    rearTarget.current.position.x = -mouse.x * 30;
+   }
+   if (frontTarget && frontTarget.current) {
+    frontTarget.current.position.y = -mouse.y * 20;
+    frontTarget.current.position.x = -mouse.x * 60;
+   }
  });
  // Return a group containing two sprites. One positioned eight units in front of the ship, and the other 16 in front.
  // We give the spriteMaterial a map prop with the loaded sprite texture as a value/

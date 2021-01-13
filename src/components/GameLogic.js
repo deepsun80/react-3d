@@ -33,12 +33,16 @@ function GameLogic({
  useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
    // The result will be an array where each index is either a hit enemy or an unhit enemy.
-
+    let opacityVar = 1;
    // Draw destoyed sprite
    enemies.map(enemy => {
     lasers.map(laser => {
       if(getDistance(laser, enemy) < distanceVar) {
-        setEnemiesDestroyed([enemy, ...enemiesDestroyed]);
+        setEnemiesDestroyed([{x: enemy.x, y: enemy.y, z: enemy.z, opacity: opacityVar}, ...enemiesDestroyed]);
+
+        setTimeout(() => {
+          setEnemiesDestroyed([])
+        }, 100);
       }
     })
    });

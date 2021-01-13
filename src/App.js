@@ -33,7 +33,7 @@ import "./App.css";
 
 function Scene() {
   const game = useRecoilValue(gameState);
-
+console.log(game);
   return (
     game ? (
     <>

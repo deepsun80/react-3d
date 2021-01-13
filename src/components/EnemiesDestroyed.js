@@ -1,22 +1,29 @@
-import { useState } from 'react';
+import { useRef } from "react";
+import { useFrame } from "react-three-fiber";
 import { useRecoilValue } from "recoil";
 import { enemyDestroyedState } from "../gameState";
 
 // Manages Drawing enemies that currently exist in state
 function EnemiesDestroyed() {
- const [opacity, setOpacity] = useState(1.0);
  const enemiesDestroyed = useRecoilValue(enemyDestroyedState);
 
- setTimeout(() => {
-   setOpacity(0.0);
- }, 10000);
- 
+ const enemyDestroyed = useRef();
+
+ useFrame(() => {
+   if (enemyDestroyed && enemyDestroyed.current) {
+    enemyDestroyed.current.material.opacity -= 0.05;
+    enemyDestroyed.current.scale.x += 0.05;
+    enemyDestroyed.current.scale.y += 0.05;
+    enemyDestroyed.current.scale.z += 0.05;
+   }
+ });
+
  return (
    <group>
      {enemiesDestroyed.map((enemy, id) => (
-       <mesh position={[enemy.x, enemy.y, enemy.z]} key={`${id}`}>
+       <mesh position={[enemy.x, enemy.y, enemy.z]} key={`${id}`} ref={enemyDestroyed}>
          <sphereBufferGeometry attach="geometry" args={[2, 20,20]} />
-         <meshStandardMaterial opacity={0} attach="material" color="red" wireframe />
+         <meshStandardMaterial attach="material" color="red" transparent depthWrite={false} />
        </mesh>
      ))}
    </group>

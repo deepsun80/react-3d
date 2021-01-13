@@ -10,6 +10,8 @@ function StartScreen() {
  const hover = event => setHover(true);
  const unhover = event =>  setHover(false);
 
+ /* Reset all recoil values to default */
+
  return (
    !game ? (
     <>

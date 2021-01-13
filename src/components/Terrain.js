@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useFrame } from "react-three-fiber";
 
 // A Ground plane that moves relative to the player. The player stays at 0,0
@@ -6,7 +6,8 @@ function Terrain({ groundSpeed, groundHeight }) {
  const terrain = useRef();
 
  useFrame(() => {
-   terrain.current.position.z += groundSpeed;
+   if (terrain && terrain.current) 
+    terrain.current.position.z += groundSpeed;
  });
 
  return (
