@@ -4,6 +4,7 @@ import { RecoilRoot, useRecoilValue } from "recoil";
 
 import {
   Enemies,
+  EnemiesDestroyed,
   GameLogic,
   GameOverText,
   LaserController, 
@@ -48,6 +49,7 @@ function Scene() {
       </Suspense>
       <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} />
       <Enemies />
+      <EnemiesDestroyed />
       <Target />
       <Lasers />
       <LaserController />

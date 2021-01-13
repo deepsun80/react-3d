@@ -1,4 +1,5 @@
 import Enemies from './Enemies';
+import EnemiesDestroyed from './EnemiesDestroyed';
 import GameLogic from './GameLogic';
 import GameOverText from './GameOverText';
 import LaserController from './LaserController';
@@ -12,7 +13,8 @@ import Target from './Target';
 import Terrain from './Terrain';
 
 export { 
- Enemies, 
+ Enemies,
+ EnemiesDestroyed,
  GameLogic,
  GameOverText,
  LaserController, 

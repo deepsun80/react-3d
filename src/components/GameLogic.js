@@ -4,7 +4,8 @@ import {
  gameState, 
  shipPositionState, 
  laserPositionState, 
- enemyPositionState, 
+ enemyPositionState,
+ enemyDestroyedState,
  scoreState, 
  missedEnemiesState 
 } from "../gameState";
@@ -20,6 +21,9 @@ function GameLogic({
 }) {
  const [game, setGame] = useRecoilState(gameState);
  const [enemies, setEnemies] = useRecoilState(enemyPositionState);
+ 
+ const [enemiesDestroyed, setEnemiesDestroyed] = useRecoilState(enemyDestroyedState);
+
  const [lasers, setLaserPositions] = useRecoilState(laserPositionState);
  const [score, setScore] = useRecoilState(scoreState);
  const [shipPosition] = useRecoilState(shipPositionState);
@@ -29,9 +33,20 @@ function GameLogic({
  useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
    // The result will be an array where each index is either a hit enemy or an unhit enemy.
+
+   // Draw destoyed sprite
+   enemies.map(enemy => {
+    lasers.map(laser => {
+      if(getDistance(laser, enemy) < distanceVar) {
+        setEnemiesDestroyed([enemy, ...enemiesDestroyed]);
+      }
+    })
+   });
+
    const hitEnemies = enemies
-     ? enemies.map(
-         (enemy) =>
+     ? enemies
+      .map(
+         (enemy) => 
            lasers.filter(
              (laser) =>
                lasers.filter((laser) => getDistance(laser, enemy) < distanceVar).length > 0
@@ -47,10 +62,10 @@ function GameLogic({
    // Move all of the enemies. Remove enemies that have been destroyed.
    setEnemies(
      enemies
-       .map((enemy) => ({ x: enemy.x, y: enemy.y, z: enemy.z + enemySpeed }))
-       .filter((enemy, idx) => !hitEnemies[idx])
-   );
-
+      .map((enemy, idx) => ({ x: enemy.x, y: enemy.y, z: enemy.z + enemySpeed }))
+      .filter((enemy, idx) => !hitEnemies[idx])
+   );   
+   
    // Set missed number of enemies
    setMissed(
     enemies
