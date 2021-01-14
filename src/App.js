@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 
 import {
   Enemies,
   EnemiesDestroyed,
   GameLogic,
-  // GameOverText,
+  GameOverText,
   LaserController, 
   Lasers, 
   Loading,
@@ -28,12 +28,13 @@ import {
   getDistance,
 } from './helpers';
 
-// import { gameState } from './gameState';
+import { gameOverState } from './gameState';
 
 import "./App.css";
 
 function Scene({ setGame }) {
-  // const game = useRecoilValue(gameState);
+  const gameOver = useRecoilValue(gameOverState);
+
   return (
     <>
       <ambientLight intensity={0.1} />
@@ -42,7 +43,7 @@ function Scene({ setGame }) {
       {/* <StartScreen />  */}
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
-      {/* <GameOverText /> */}
+      {gameOver && <GameOverText />}
       <Suspense fallback={<Loading />}>
         <Ship />
       </Suspense>

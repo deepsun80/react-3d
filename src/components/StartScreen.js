@@ -13,15 +13,12 @@ function StartScreen({ setGame }) {
   return () => setDidMount(false);
   }, [])
 
-  if(!didMount) {
-  return null;
-  }
-
   const startGame = () => {
     setGame(true)
   }
 
  return (
+   didMount ? 
     <>
     <group onPointerOver={hover} onPointerOut={unhover} onClick={startGame}>
       <Text
@@ -35,7 +32,7 @@ function StartScreen({ setGame }) {
         <meshBasicMaterial attach="material" color={hovered ? "grey" : "white"} />
       </Box>
       </group>
-    </>
+    </> : null
  );
 }
 

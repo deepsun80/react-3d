@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFrame } from "react-three-fiber";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import {
  // gameState, 
  shipPositionState, 
@@ -8,7 +8,8 @@ import {
  enemyPositionState,
  enemyDestroyedState,
  scoreState, 
- missedEnemiesState 
+ missedEnemiesState,
+ gameOverState 
 } from "../gameState";
 
 // This component runs game logic on each frame draw to update game state.
@@ -28,27 +29,26 @@ function GameLogic({
  const [score, setScore] = useRecoilState(scoreState);
  const [shipPosition] = useRecoilState(shipPositionState);
  const [missed, setMissed] = useRecoilState(missedEnemiesState);
-
- const [didMount, setDidMount] = useState(false); 
+ const [gameOver, setGameOver] = useRecoilState(gameOverState);
 
   useEffect(() => {
    // Game over 
    if (missed.length >= 5) {
-    setGame(false);
-   }
-  }, [missed, setGame])
+    setGameOver(true);
 
-  useEffect(() => {
-    setDidMount(true);
-    return () => setDidMount(false);
-    }, [])
-  
+    setTimeout(() => {
+      setGame(false);
+    }, 2000);
+   }
+
+  }, [missed, setGame, setGameOver])
+
   useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
    // The result will be an array where each index is either a hit enemy or an unhit enemy.
 
    // Draw destoyed sprite
-   enemies.map(enemy => {
+   enemies.map(enemy => 
     lasers.map(laser => {
       if(getDistance(laser, enemy) < distanceVar) {
         setEnemiesDestroyed([{x: enemy.x, y: enemy.y, z: enemy.z }, ...enemiesDestroyed]);
@@ -58,7 +58,7 @@ function GameLogic({
         }, 100);
       }
     })
-   });
+   );
 
    const hitEnemies = enemies
      ? enemies
@@ -71,7 +71,7 @@ function GameLogic({
        )
      : [];
 
-     if (hitEnemies.includes(true) && enemies.length > 0) {
+     if (hitEnemies.includes(true) && enemies.length > 0 && !gameOver) {
        setScore(score + hitEnemies.filter((hit) => hit).length);
        console.log("hit detected", score);
      }
@@ -124,10 +124,7 @@ function GameLogic({
      }); 
    });
 
-   if(!didMount) {
-    return null;
-    }
-  return null;
+   return null;
 }
 
 export default GameLogic;

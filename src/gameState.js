@@ -44,3 +44,8 @@ export const missedEnemiesState = atom({
  key: "missedEnemies",
  default: []
 })
+
+export const gameOverState = atom({
+ key: "gameOver",
+ default: false
+})
