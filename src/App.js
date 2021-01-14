@@ -1,12 +1,13 @@
+import { useState, useEffect } from 'react';
 import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot } from "recoil";
 
 import {
   Enemies,
   EnemiesDestroyed,
   GameLogic,
-  GameOverText,
+  // GameOverText,
   LaserController, 
   Lasers, 
   Loading,
@@ -27,20 +28,18 @@ import {
   getDistance,
 } from './helpers';
 
-import { gameState } from './gameState';
+// import { gameState } from './gameState';
 
 import "./App.css";
 
-function Scene() {
-  const game = useRecoilValue(gameState);
-console.log(game);
+function Scene({ setGame }) {
+  // const game = useRecoilValue(gameState);
   return (
-    game ? (
     <>
       <ambientLight intensity={0.1} />
       {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
       <directionalLight intensity={1} />
-      <StartScreen /> 
+      {/* <StartScreen />  */}
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
       {/* <GameOverText /> */}
@@ -60,21 +59,24 @@ console.log(game);
         laserZVelocity={LASER_Z_VELOCITY} 
         laserRange={LASER_RANGE}
         groundHeight={GROUND_HEIGHT}
+        setGame={setGame}
       />
     </>
-    ) : (
-      <StartScreen />
-    )
   );
 }
 
 function App() {
+  const [game, setGame] = useState(false);
+
   return (
-    <Canvas>
-      <RecoilRoot>
-        <Scene />
-      </RecoilRoot>
-    </Canvas>
+      <Canvas>
+        {game ?
+          <RecoilRoot>
+            <Scene setGame={setGame} />
+          </RecoilRoot> : 
+          <StartScreen setGame={setGame} />
+        }
+      </Canvas>
   );
 }
 

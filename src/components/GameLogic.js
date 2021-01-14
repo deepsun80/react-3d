@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useFrame } from "react-three-fiber";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
- gameState, 
+ // gameState, 
  shipPositionState, 
  laserPositionState, 
  enemyPositionState,
@@ -12,6 +13,7 @@ import {
 
 // This component runs game logic on each frame draw to update game state.
 function GameLogic({
+  setGame,
   getDistance,
   distanceVar, 
   enemySpeed, 
@@ -19,26 +21,37 @@ function GameLogic({
   laserRange, 
   groundHeight 
 }) {
- const [game, setGame] = useRecoilState(gameState);
+//  const [game, setGame] = useRecoilState(gameState);
  const [enemies, setEnemies] = useRecoilState(enemyPositionState);
- 
  const [enemiesDestroyed, setEnemiesDestroyed] = useRecoilState(enemyDestroyedState);
-
  const [lasers, setLaserPositions] = useRecoilState(laserPositionState);
  const [score, setScore] = useRecoilState(scoreState);
  const [shipPosition] = useRecoilState(shipPositionState);
  const [missed, setMissed] = useRecoilState(missedEnemiesState);
- const isMissed = useRecoilValue(missedEnemiesState);
 
- useFrame(({ mouse }) => {
+ const [didMount, setDidMount] = useState(false); 
+
+  useEffect(() => {
+   // Game over 
+   if (missed.length >= 5) {
+    setGame(false);
+   }
+  }, [missed, setGame])
+
+  useEffect(() => {
+    setDidMount(true);
+    return () => setDidMount(false);
+    }, [])
+  
+  useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
    // The result will be an array where each index is either a hit enemy or an unhit enemy.
-    let opacityVar = 1;
+
    // Draw destoyed sprite
    enemies.map(enemy => {
     lasers.map(laser => {
       if(getDistance(laser, enemy) < distanceVar) {
-        setEnemiesDestroyed([{x: enemy.x, y: enemy.y, z: enemy.z, opacity: opacityVar}, ...enemiesDestroyed]);
+        setEnemiesDestroyed([{x: enemy.x, y: enemy.y, z: enemy.z }, ...enemiesDestroyed]);
 
         setTimeout(() => {
           setEnemiesDestroyed([])
@@ -111,12 +124,10 @@ function GameLogic({
      }); 
    });
 
-   // Game over 
-   if (isMissed.length >= 5) {
-    setGame(false);
-   }
-
- return null;
+   if(!didMount) {
+    return null;
+    }
+  return null;
 }
 
 export default GameLogic;

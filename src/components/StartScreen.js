@@ -1,21 +1,29 @@
-import { useState } from 'react';
-import { useRecoilState } from "recoil";
-import { gameState } from "../gameState";
+import { useState, useEffect } from 'react';
 import { Text, Box } from 'drei';
 
-function StartScreen() {
- const [game, setGame] = useRecoilState(gameState);
-
+function StartScreen({ setGame }) {
  const [hovered, setHover] = useState(false);
+ const [didMount, setDidMount] = useState(false); 
+
  const hover = event => setHover(true);
  const unhover = event =>  setHover(false);
 
- /* Reset all recoil values to default */
+ useEffect(() => {
+  setDidMount(true);
+  return () => setDidMount(false);
+  }, [])
+
+  if(!didMount) {
+  return null;
+  }
+
+  const startGame = () => {
+    setGame(true)
+  }
 
  return (
-   !game ? (
     <>
-    <group onPointerOver={hover} onPointerOut={unhover} onClick={() => setGame(true)}>
+    <group onPointerOver={hover} onPointerOut={unhover} onClick={startGame}>
       <Text
         color={hovered ? "white" : "black"}
         scale={[1.5, 1.5]}
@@ -28,7 +36,6 @@ function StartScreen() {
       </Box>
       </group>
     </>
-   ) : null
  );
 }
 
