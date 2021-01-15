@@ -32,7 +32,7 @@ import { gameOverState } from './gameState';
 
 import "./App.css";
 
-function Scene({ setGame }) {
+function Scene({ setGame, setNewLevel, setLevel, level }) {
   const gameOver = useRecoilValue(gameOverState);
 
   return (
@@ -56,11 +56,20 @@ function Scene({ setGame }) {
       <GameLogic 
         getDistance={getDistance}
         distanceVar={3} 
-        enemySpeed={ENEMY_SPEED}
+        enemySpeed={
+          level === 1 ? ENEMY_SPEED.level1 :
+          level === 2 ? ENEMY_SPEED.level2 :
+          level === 3 ? ENEMY_SPEED.level3 :
+          level === 4 ? ENEMY_SPEED.level4 :
+          ENEMY_SPEED.level5
+        }
         laserZVelocity={LASER_Z_VELOCITY} 
         laserRange={LASER_RANGE}
         groundHeight={GROUND_HEIGHT}
         setGame={setGame}
+        setNewLevel={setNewLevel}
+        setLevel={setLevel}
+        level={level}
       />
     </>
   );
@@ -68,14 +77,16 @@ function Scene({ setGame }) {
 
 function App() {
   const [game, setGame] = useState(false);
+  const [newLevel, setNewLevel] = useState(false);
+  const [level, setLevel] = useState(1);
 
   return (
       <Canvas>
-        {game ?
+        {(game && newLevel) ?
           <RecoilRoot>
-            <Scene setGame={setGame} />
+            <Scene setGame={setGame} setNewLevel={setNewLevel} setLevel={setLevel} level={level} />
           </RecoilRoot> : 
-          <StartScreen setGame={setGame} />
+          <StartScreen setGame={setGame} setNewLevel={setNewLevel} level={level} />
         }
       </Canvas>
   );

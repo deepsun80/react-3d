@@ -1,7 +1,7 @@
 // Game settings.
 const LASER_RANGE = 100;
 const LASER_Z_VELOCITY = 1;
-const ENEMY_SPEED = 0.05;
+const ENEMY_SPEED = { level1: 0.05, level2: 0.10, level3: 0.15, level4: 0.20, level5: 0.25 };
 const GROUND_HEIGHT = -50;
 const TEXT_POS = { x: window.innerWidth * .0035, y: 3.4 };
 

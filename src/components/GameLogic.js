@@ -15,12 +15,15 @@ import {
 // This component runs game logic on each frame draw to update game state.
 function GameLogic({
   setGame,
+  setNewLevel,
+  setLevel,
   getDistance,
   distanceVar, 
   enemySpeed, 
   laserZVelocity, 
   laserRange, 
-  groundHeight 
+  groundHeight,
+  level
 }) {
 //  const [game, setGame] = useRecoilState(gameState);
  const [enemies, setEnemies] = useRecoilState(enemyPositionState);
@@ -37,11 +40,17 @@ function GameLogic({
     setGameOver(true);
 
     setTimeout(() => {
+      setLevel(1);
       setGame(false);
     }, 2000);
    }
 
-  }, [missed, setGame, setGameOver])
+   if(score >= 30) {
+     setNewLevel(false);
+     setLevel(level + 1);
+   }
+
+  }, [missed, setGame, setGameOver, setNewLevel, setLevel, score, level])
 
   useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
@@ -73,7 +82,6 @@ function GameLogic({
 
      if (hitEnemies.includes(true) && enemies.length > 0 && !gameOver) {
        setScore(score + hitEnemies.filter((hit) => hit).length);
-       console.log("hit detected", score);
      }
 
    // Move all of the enemies. Remove enemies that have been destroyed.
