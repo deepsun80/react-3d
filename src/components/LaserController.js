@@ -1,8 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { shipPositionState, laserPositionState } from "../gameState";
 
-// An invisible clickable element in the front of the scene.
-// Manages creating lasers with the correct initial velocity on click.
 function LaserController() {
  const shipPosition = useRecoilValue(shipPositionState);
  const [lasers, setLasers] = useRecoilState(laserPositionState);

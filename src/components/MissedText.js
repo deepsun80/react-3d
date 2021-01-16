@@ -2,7 +2,6 @@ import { useRecoilValue } from "recoil";
 import { missedEnemiesState } from "../gameState";
 import { Text } from 'drei';
 
-// Draws all of the lasers existing in state.
 function MissedText({ txtPos }) {
  const missed = useRecoilValue(missedEnemiesState);
 

@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { enemyPositionState } from "../gameState";
 
-// Manages Drawing enemies that currently exist in state
 function Enemies() {
  const enemies = useRecoilValue(enemyPositionState);
  return (

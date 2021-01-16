@@ -3,7 +3,6 @@ import { useFrame } from "react-three-fiber";
 import { useRecoilValue } from "recoil";
 import { enemyDestroyedState } from "../gameState";
 
-// Manages Drawing enemies that currently exist in state
 function EnemiesDestroyed() {
  const enemiesDestroyed = useRecoilValue(enemyDestroyedState);
 

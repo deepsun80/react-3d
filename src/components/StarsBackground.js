@@ -2,7 +2,6 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
 
-/** This component rotates a bunch of stars */
 function StarsBackground() {
  let group = useRef();
  let theta = 0;

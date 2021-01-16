@@ -13,6 +13,7 @@ import {
   MissedText,
   ScoreText,
   Ship,
+  ShipDestroyed,
   StarsBackground,
   // StarsForeground,
   StartScreen, 
@@ -46,6 +47,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
       {gameOver && <GameOverText />}
       <Suspense fallback={<Loading />}>
         <Ship />
+        <ShipDestroyed />
       </Suspense>
       {/* <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} /> */}
       {/* <StarsForeground /> */}

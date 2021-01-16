@@ -3,7 +3,8 @@ import { useFrame } from "react-three-fiber";
 import { useRecoilState } from "recoil";
 import {
  // gameState, 
- shipPositionState, 
+ shipPositionState,
+ shipDestroyedState, 
  laserPositionState, 
  enemyPositionState,
  enemyDestroyedState,
@@ -30,6 +31,7 @@ function GameLogic({
  const [lasers, setLaserPositions] = useRecoilState(laserPositionState);
  const [score, setScore] = useRecoilState(scoreState);
  const [shipPosition] = useRecoilState(shipPositionState);
+ const [shipDestroyed, setShipDestroyed] = useRecoilState(shipDestroyedState);
  const [missed, setMissed] = useRecoilState(missedEnemiesState);
  const [gameOver, setGameOver] = useRecoilState(gameOverState);
 
@@ -95,11 +97,12 @@ function GameLogic({
       .filter((enemy) => enemy.z >= 0)
    );
 
-   //If player hit set game over
+   //If player hit display detroyed and set game over
    enemies
      .map((enemy, idx) => {
        if (getDistance(shipPosition.position, enemy) < distanceVar) {
         setGameOver(true);
+        setShipDestroyed([{ x: shipPosition.position.x, y: shipPosition.position.y, z: shipPosition.position.z}]);
 
         setTimeout(() => {
           setGame(false);

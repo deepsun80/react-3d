@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { laserPositionState } from "../gameState";
 
-// Draws all of the lasers existing in state.
 function Lasers() {
  const lasers = useRecoilValue(laserPositionState);
  return (

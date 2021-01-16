@@ -1,11 +1,12 @@
 import { useRef } from "react";
 import { useFrame, useLoader } from "react-three-fiber";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { shipPositionState } from "../gameState";
+import { shipPositionState, gameOverState } from "../gameState";
 
 function Ship() {
  const [shipPosition, setShipPosition] = useRecoilState(shipPositionState);
+ const gameOver = useRecoilValue(gameOverState);
 
  const ship = useRef();
  useFrame(({ mouse }) => {
@@ -14,7 +15,7 @@ function Ship() {
      rotation: { x: -mouse.x * 0.5, y: -mouse.y * 0.2, z: -mouse.x * 0.5 }
    });
  });
- // Update the ships position from the updated state.
+
  useFrame(() => {
    if (ship && ship.current) {
     ship.current.rotation.z = shipPosition.rotation.z;
@@ -29,6 +30,7 @@ function Ship() {
  const { nodes } = useLoader(GLTFLoader, "/arwing.glb");
 
  return (
+   !gameOver ? 
    <group ref={ship}>
      <mesh visible geometry={nodes.Default.geometry}>
        <meshStandardMaterial
@@ -38,7 +40,7 @@ function Ship() {
          metalness={0}
        />
      </mesh>
-   </group>
+   </group> : null
  );
 }
 

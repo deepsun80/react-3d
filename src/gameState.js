@@ -16,28 +16,33 @@ export const gameState = atom({
 })
 
 export const shipPositionState = atom({
- key: "shipPosition", // unique ID (with respect to other atoms/selectors)
- default: { position: {}, rotation: {} }, // default value (aka initial value)
+ key: "shipPosition",
+ default: { position: {}, rotation: {} },
+});
+
+export const shipDestroyedState = atom({
+ key: "shipDestroyed",
+ default: [],
 });
 
 export const enemyPositionState = atom({
- key: "enemyPosition", // unique ID (with respect to other atoms/selectors)
- default: createEnemies(150), // default value (aka initial value)
+ key: "enemyPosition",
+ default: createEnemies(150),
 });
 
 export const enemyDestroyedState = atom({
- key: "enemyDestroyedPosition", // unique ID (with respect to other atoms/selectors)
- default: [], // default value (aka initial value)
+ key: "enemyDestroyedPosition",
+ default: [],
 })
 
 export const laserPositionState = atom({
- key: "laserPositions", // unique ID (with respect to other atoms/selectors)
- default: [] // default value (aka initial value)
+ key: "laserPositions",
+ default: []
 });
 
 export const scoreState = atom({
- key: "score", // unique ID (with respect to other atoms/selectors)
- default: 0, // default value (aka initial value)
+ key: "score",
+ default: 0,
 });
 
 export const missedEnemiesState = atom({
