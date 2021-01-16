@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Suspense } from "react";
+import { useState, Suspense } from 'react';
 import { Canvas } from "react-three-fiber";
 import { RecoilRoot, useRecoilValue } from "recoil";
 
@@ -14,16 +13,17 @@ import {
   MissedText,
   ScoreText,
   Ship,
+  StarsForeground,
   StartScreen, 
   Target, 
-  Terrain 
+  // Terrain 
 } from './components';
 
 import { 
   LASER_RANGE,
   LASER_Z_VELOCITY,
   ENEMY_SPEED,
-  GROUND_HEIGHT,
+  // GROUND_HEIGHT,
   TEXT_POS,
   getDistance,
 } from './helpers';
@@ -47,7 +47,8 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
       <Suspense fallback={<Loading />}>
         <Ship />
       </Suspense>
-      <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} />
+      {/* <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} /> */}
+      <StarsForeground />
       <Enemies />
       <EnemiesDestroyed />
       <Target />
@@ -65,7 +66,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         }
         laserZVelocity={LASER_Z_VELOCITY} 
         laserRange={LASER_RANGE}
-        groundHeight={GROUND_HEIGHT}
+        // groundHeight={GROUND_HEIGHT}
         setGame={setGame}
         setNewLevel={setNewLevel}
         setLevel={setLevel}

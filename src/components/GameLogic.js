@@ -22,7 +22,6 @@ function GameLogic({
   enemySpeed, 
   laserZVelocity, 
   laserRange, 
-  groundHeight,
   level
 }) {
 //  const [game, setGame] = useRecoilState(gameState);
@@ -118,7 +117,7 @@ function GameLogic({
          z: laser.z - laserZVelocity,
          velocity: laser.velocity,
        }))
-       .filter((laser) => laser.z > -laserRange && laser.y > groundHeight)
+       .filter((laser) => laser.z > -laserRange)
    );
 
    //Remove lasers that have hit enemies
