@@ -38,10 +38,9 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
 
   return (
     <>
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.5} />
       {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
-      <directionalLight intensity={1} />
-      {/* <StartScreen />  */}
+      {/* <directionalLight intensity={1} /> */}
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
       {gameOver && <GameOverText />}
