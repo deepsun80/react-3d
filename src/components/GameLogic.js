@@ -35,11 +35,10 @@ function GameLogic({
 
   useEffect(() => {
    // Game over 
-   if (missed.length >= 5) {
+   if (missed.length >= 10) {
     setGameOver(true);
 
     setTimeout(() => {
-      setLevel(1);
       setGame(false);
     }, 2000);
    }
@@ -96,18 +95,19 @@ function GameLogic({
       .filter((enemy) => enemy.z >= 0)
    );
 
-   //Player hit
+   //If player hit set game over
    enemies
      .map((enemy, idx) => {
        if (getDistance(shipPosition.position, enemy) < distanceVar) {
-           console.log("Player hit");
-           return setEnemies(
-             enemies.slice(idx + 1, enemies.length)
-           );       
+        setGameOver(true);
+
+        setTimeout(() => {
+          setGame(false);
+        }, 2000);   
        } else return null
      }); 
 
-   // Move the Lasers and remove lasers at end of range or that have hit the ground. 
+   // Move the Lasers and remove lasers at end of range 
    setLaserPositions(
      lasers
        .map((laser) => ({

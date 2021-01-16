@@ -14,7 +14,7 @@ import {
   ScoreText,
   Ship,
   StarsBackground,
-  StarsForeground,
+  // StarsForeground,
   StartScreen, 
   Target, 
   // Terrain 
@@ -38,8 +38,8 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
+      <ambientLight intensity={0.25} />
+      <pointLight intensity={0.6} position={[0, 10, 4]} />
       {/* <directionalLight intensity={1} /> */}
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
@@ -48,7 +48,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         <Ship />
       </Suspense>
       {/* <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} /> */}
-      <StarsForeground />
+      {/* <StarsForeground /> */}
       <StarsBackground />
       <Enemies />
       <EnemiesDestroyed />
