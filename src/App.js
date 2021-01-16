@@ -13,6 +13,7 @@ import {
   MissedText,
   ScoreText,
   Ship,
+  StarsBackground,
   StarsForeground,
   StartScreen, 
   Target, 
@@ -49,6 +50,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
       </Suspense>
       {/* <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} /> */}
       <StarsForeground />
+      <StarsBackground />
       <Enemies />
       <EnemiesDestroyed />
       <Target />

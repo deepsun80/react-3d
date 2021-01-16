@@ -8,6 +8,7 @@ import Loading from './Loading';
 import MissedText from './MissedText';
 import ScoreText from './ScoreText';
 import Ship from './Ship';
+import StarsBackground from './StarsBackground';
 import StarsForeground from './StarsForeground';
 import StartScreen from './StartScreen';
 import Target from './Target';
@@ -24,6 +25,7 @@ export {
  MissedText,
  ScoreText,
  Ship,
+ StarsBackground,
  StarsForeground,
  StartScreen,
  Target, 
