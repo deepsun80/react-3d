@@ -35,7 +35,7 @@ function Ship() {
      <mesh visible geometry={nodes.Default.geometry}>
        <meshStandardMaterial
          attach="material"
-         color="white"
+         color="grey"
          roughness={1}
          metalness={0}
        />

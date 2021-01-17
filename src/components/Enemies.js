@@ -8,7 +8,7 @@ function Enemies() {
      {enemies.map((enemy, id) => (
        <mesh position={[enemy.x, enemy.y, enemy.z]} key={`${id}`}>
          <sphereBufferGeometry attach="geometry" args={[2, 8, 8]} />
-         <meshStandardMaterial attach="material" color="white" />
+         <meshStandardMaterial attach="material" color="#FFFF99" />
        </mesh>
      ))}
    </group>

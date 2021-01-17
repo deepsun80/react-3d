@@ -1,3 +1,4 @@
+import Effects from './Effects';
 import Enemies from './Enemies';
 import EnemiesDestroyed from './EnemiesDestroyed';
 import GameLogic from './GameLogic';
@@ -15,7 +16,8 @@ import StartScreen from './StartScreen';
 import Target from './Target';
 import Terrain from './Terrain';
 
-export { 
+export {
+ Effects,
  Enemies,
  EnemiesDestroyed,
  GameLogic,

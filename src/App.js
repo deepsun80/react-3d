@@ -1,8 +1,10 @@
 import { useState, Suspense } from 'react';
 import { Canvas } from "react-three-fiber";
 import { RecoilRoot, useRecoilValue } from "recoil";
+import * as THREE from 'three';
 
 import {
+  Effects,
   Enemies,
   EnemiesDestroyed,
   GameLogic,
@@ -40,8 +42,8 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
   return (
     <>
       <ambientLight intensity={0.25} />
-      <pointLight intensity={0.6} position={[0, 10, 4]} />
-      {/* <directionalLight intensity={1} /> */}
+      {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
+      {/* <directionalLight intensity={.01} /> */}
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
       {gameOver && <GameOverText />}
@@ -57,6 +59,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
       <Target />
       <Lasers />
       <LaserController />
+      {/* <Effects /> */}
       <GameLogic 
         getDistance={getDistance}
         distanceVar={3} 
@@ -85,7 +88,10 @@ function App() {
   const [level, setLevel] = useState(1);
 
   return (
-      <Canvas>
+      <Canvas
+        onCreated={({ gl }) => {
+          gl.setClearColor(new THREE.Color('#020209'))
+        }}>
         {(game && newLevel) ?
           <RecoilRoot>
             <Scene setGame={setGame} setNewLevel={setNewLevel} setLevel={setLevel} level={level} />
