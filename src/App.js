@@ -16,6 +16,7 @@ import {
   ScoreText,
   Ship,
   ShipDestroyed,
+  SkyBox,
   StarsBackground,
   StartScreen, 
   Target, 
@@ -53,6 +54,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
       <Target />
       <Lasers />
       <LaserController />
+      <SkyBox />
       <Effects />
       <GameLogic 
         getDistance={getDistance}

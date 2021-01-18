@@ -10,11 +10,10 @@ import MissedText from './MissedText';
 import ScoreText from './ScoreText';
 import Ship from './Ship';
 import ShipDestroyed from './ShipDestroyed';
+import SkyBox from './SkyBox';
 import StarsBackground from './StarsBackground';
-import StarsForeground from './StarsForeground';
 import StartScreen from './StartScreen';
 import Target from './Target';
-import Terrain from './Terrain';
 
 export {
  Effects,
@@ -29,9 +28,8 @@ export {
  ScoreText,
  Ship,
  ShipDestroyed,
+ SkyBox,
  StarsBackground,
- StarsForeground,
  StartScreen,
- Target, 
- Terrain 
+ Target
 }
