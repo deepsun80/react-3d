@@ -17,7 +17,7 @@ function StarsBackground() {
  });
 
    const [geo, mat, coords] = useMemo(() => {
-   const geo = new THREE.SphereBufferGeometry(1, 10, 10)
+   const geo = new THREE.SphereBufferGeometry(2, 10, 10)
    const mat = new THREE.MeshBasicMaterial({ color: new THREE.Color('white'), transparent: true })
    const coords = new Array(1000).fill().map(i => [Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 4000 - 2000]);
    return [geo, mat, coords]

@@ -17,17 +17,14 @@ import {
   Ship,
   ShipDestroyed,
   StarsBackground,
-  // StarsForeground,
   StartScreen, 
   Target, 
-  // Terrain 
 } from './components';
 
 import { 
   LASER_RANGE,
   LASER_Z_VELOCITY,
   ENEMY_SPEED,
-  // GROUND_HEIGHT,
   TEXT_POS,
   getDistance,
 } from './helpers';
@@ -41,25 +38,22 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
 
   return (
     <>
-      <ambientLight intensity={0.25} />
-      {/* <pointLight intensity={0.6} position={[0, 10, 4]} /> */}
-      {/* <directionalLight intensity={.01} /> */}
+      <ambientLight intensity={1.5} />
+      <directionalLight intensity={2.0} />
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
       {gameOver && <GameOverText />}
       <Suspense fallback={<Loading />}>
         <Ship />
         <ShipDestroyed />
+        <Enemies />
       </Suspense>
-      {/* <Terrain groundSpeed={0.4} groundHeight={GROUND_HEIGHT} /> */}
-      {/* <StarsForeground /> */}
       <StarsBackground />
-      <Enemies />
       <EnemiesDestroyed />
       <Target />
       <Lasers />
       <LaserController />
-      {/* <Effects /> */}
+      <Effects />
       <GameLogic 
         getDistance={getDistance}
         distanceVar={3} 
@@ -88,10 +82,10 @@ function App() {
   const [level, setLevel] = useState(1);
 
   return (
-      <Canvas
+      <Canvas 
         onCreated={({ gl }) => {
-          gl.setClearColor(new THREE.Color('#020209'))
-        }}>
+        gl.setClearColor(new THREE.Color('#000007'))
+      }}>
         {(game && newLevel) ?
           <RecoilRoot>
             <Scene setGame={setGame} setNewLevel={setNewLevel} setLevel={setLevel} level={level} />

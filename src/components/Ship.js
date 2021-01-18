@@ -3,6 +3,7 @@ import { useFrame, useLoader } from "react-three-fiber";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { shipPositionState, gameOverState } from "../gameState";
+import * as THREE from 'three';
 
 function Ship() {
  const [shipPosition, setShipPosition] = useRecoilState(shipPositionState);
@@ -19,7 +20,7 @@ function Ship() {
  useFrame(() => {
    if (ship && ship.current) {
     ship.current.rotation.z = shipPosition.rotation.z;
-    ship.current.rotation.y = shipPosition.rotation.x;
+    ship.current.rotation.y = shipPosition.rotation.x - THREE.Math.degToRad(180);
     ship.current.rotation.x = shipPosition.rotation.y;
     ship.current.position.y = shipPosition.position.y;
     ship.current.position.x = shipPosition.position.x;
@@ -27,18 +28,12 @@ function Ship() {
    }
  });
 
- const { nodes } = useLoader(GLTFLoader, "/arwing.glb");
+ const { nodes } = useLoader(GLTFLoader, "/StarSparrow09.glb");
 
  return (
    !gameOver ? 
-   <group ref={ship}>
-     <mesh visible geometry={nodes.Default.geometry}>
-       <meshStandardMaterial
-         attach="material"
-         color="grey"
-         roughness={1}
-         metalness={0}
-       />
+   <group ref={ship} scale={[0.3, 0.3, 0.3]}>
+     <mesh visible geometry={nodes.StarSparrow09.geometry} material={nodes.StarSparrow09.material}>
      </mesh>
    </group> : null
  );

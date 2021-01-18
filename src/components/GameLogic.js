@@ -35,22 +35,22 @@ function GameLogic({
  const [missed, setMissed] = useRecoilState(missedEnemiesState);
  const [gameOver, setGameOver] = useRecoilState(gameOverState);
 
-  useEffect(() => {
-   // Game over 
-   if (missed.length >= 10) {
-    setGameOver(true);
+  // useEffect(() => {
+  //  // Game over 
+  //  if (missed.length >= 10) {
+  //   setGameOver(true);
 
-    setTimeout(() => {
-      setGame(false);
-    }, 2000);
-   }
+  //   setTimeout(() => {
+  //     setGame(false);
+  //   }, 2000);
+  //  }
 
-   if(score >= 30) {
-     setNewLevel(false);
-     setLevel(level + 1);
-   }
+  //  if(score >= 30) {
+  //    setNewLevel(false);
+  //    setLevel(level + 1);
+  //  }
 
-  }, [missed, setGame, setGameOver, setNewLevel, setLevel, score, level])
+  // }, [missed, setGame, setGameOver, setNewLevel, setLevel, score, level])
 
   useFrame(({ mouse }) => {
    // Map through all of the enemies in state. Detect if each enemy is within one unit of a laser if they are set that place in the return array to true.
@@ -87,7 +87,7 @@ function GameLogic({
    // Move all of the enemies. Remove enemies that have been destroyed.
    setEnemies(
      enemies
-      .map((enemy, idx) => ({ x: enemy.x, y: enemy.y, z: enemy.z + enemySpeed }))
+      .map((enemy, idx) => ({ x: enemy.x, y: enemy.y, z: enemy.z + enemySpeed, yRotation: enemy.yRotation }))
       .filter((enemy, idx) => !hitEnemies[idx])
    );   
    
@@ -98,17 +98,17 @@ function GameLogic({
    );
 
    //If player hit display detroyed and set game over
-   enemies
-     .map((enemy, idx) => {
-       if (getDistance(shipPosition.position, enemy) < distanceVar) {
-        setGameOver(true);
-        setShipDestroyed([{ x: shipPosition.position.x, y: shipPosition.position.y, z: shipPosition.position.z}]);
+  //  enemies
+  //    .map((enemy, idx) => {
+  //      if (getDistance(shipPosition.position, enemy) < distanceVar) {
+  //       setGameOver(true);
+  //       setShipDestroyed([{ x: shipPosition.position.x, y: shipPosition.position.y, z: shipPosition.position.z}]);
 
-        setTimeout(() => {
-          setGame(false);
-        }, 2000);   
-       } else return null
-     }); 
+  //       setTimeout(() => {
+  //         setGame(false);
+  //       }, 2000);   
+  //      } else return null
+  //    }); 
 
    // Move the Lasers and remove lasers at end of range 
    setLaserPositions(

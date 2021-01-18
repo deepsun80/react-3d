@@ -11,6 +11,10 @@ body,
   padding: 0;
 }
 
+body {
+  background: rgb(8, 8, 65);
+}
+
 #missed-enemies-txt {
   color: #fff;
 	position: absolute;
