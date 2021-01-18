@@ -6,8 +6,28 @@ import { OrbitControls, Torus } from 'drei';
 import planeImg from './hexagonPattern.png';
 import planeImgAlpha from './hexagonPatternAlpha.png';
 import sphereImg from './hexagonPatternBW.png';
+import spaceBg from './spaceBg.jpg';
 
 import './App.css';
+
+function Plane(props) {
+  const planeRef = useRef();
+
+  const spaceTexture = useLoader(TextureLoader, spaceBg);
+
+  useFrame(() => {
+    planeRef.current.position.z = -30;
+  });
+
+  return (
+    <>
+      <mesh receiveShadow={true} ref={planeRef}>
+        <planeBufferGeometry attach='geometry' args={[100, 56, 1, 1]}  />
+        <meshStandardMaterial map={spaceTexture} attach='material' color='white' />
+      </mesh>
+  </>
+  )
+}
 
 function PlaneTop(props) {
   const planeRef = useRef();
@@ -211,10 +231,11 @@ function Scene() {
             color={'blue'}
           />
         </Torus> */}
-        <Sphere />
-        <PlaneTop />
-        <PlaneBottom />
+        {/* <Sphere /> */}
+        {/* <PlaneTop />
+        <PlaneBottom /> */}
         {/* <Cylinder /> */}
+        <Plane />
       </Suspense>
       <OrbitControls />
     </>
