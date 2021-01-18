@@ -7,10 +7,10 @@ import LaserController from './LaserController';
 import Lasers from './Lasers';
 import Loading from './Loading';
 import MissedText from './MissedText';
+import Planets from './Planets';
 import ScoreText from './ScoreText';
 import Ship from './Ship';
 import ShipDestroyed from './ShipDestroyed';
-import SkyBox from './SkyBox';
 import StarsBackground from './StarsBackground';
 import StartScreen from './StartScreen';
 import Target from './Target';
@@ -25,10 +25,10 @@ export {
  Lasers, 
  Loading, 
  MissedText,
+ Planets,
  ScoreText,
  Ship,
  ShipDestroyed,
- SkyBox,
  StarsBackground,
  StartScreen,
  Target

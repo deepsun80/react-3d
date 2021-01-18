@@ -13,10 +13,10 @@ import {
   Lasers, 
   Loading,
   MissedText,
+  Planets,
   ScoreText,
   Ship,
   ShipDestroyed,
-  SkyBox,
   StarsBackground,
   StartScreen, 
   Target, 
@@ -48,13 +48,13 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         <Ship />
         <ShipDestroyed />
         <Enemies />
+        <Planets />
       </Suspense>
       <StarsBackground />
       <EnemiesDestroyed />
       <Target />
       <Lasers />
       <LaserController />
-      <SkyBox />
       <Effects />
       <GameLogic 
         getDistance={getDistance}
@@ -68,7 +68,6 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         }
         laserZVelocity={LASER_Z_VELOCITY} 
         laserRange={LASER_RANGE}
-        // groundHeight={GROUND_HEIGHT}
         setGame={setGame}
         setNewLevel={setNewLevel}
         setLevel={setLevel}
