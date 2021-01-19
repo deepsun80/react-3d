@@ -10,9 +10,21 @@ extend({ EffectComposer, ShaderPass, RenderPass, UnrealBloomPass, FilmPass });
 
 function Effects() {
   const composer = useRef();
+
   const { scene, gl, size, camera } = useThree();
-  useEffect(() => void composer.current.setSize(size.width, size.height), [size]);
-  useFrame(() => composer.current.render(), 2);
+
+  useEffect(() => {
+    if (composer && composer.current) {
+      composer.current.setSize(size.width, size.height)
+    }
+  }, [size]);
+  
+  useFrame(() => {
+    if (composer && composer.current) {
+      composer.current.render()
+    }
+  }, 2);
+
   return (
     <effectComposer ref={composer} args={[gl]}>
       <renderPass attachArray="passes" scene={scene} camera={camera} />

@@ -27,7 +27,7 @@ export const shipDestroyedState = atom({
 
 export const enemyPositionState = atom({
  key: "enemyPosition",
- default: createEnemies(100),
+ default: createEnemies(80),
 });
 
 export const enemyDestroyedState = atom({

@@ -16,11 +16,11 @@ function Target() {
   useFrame(({ mouse }) => {
    if (rearTarget && rearTarget.current) {
     rearTarget.current.position.y = -mouse.y * 10;
-    rearTarget.current.position.x = -mouse.x * 30;
+    rearTarget.current.position.x = -mouse.x * 10;
    }
    if (frontTarget && frontTarget.current) {
     frontTarget.current.position.y = -mouse.y * 20;
-    frontTarget.current.position.x = -mouse.x * 60;
+    frontTarget.current.position.x = -mouse.x * 20;
    }
  });
 

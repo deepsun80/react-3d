@@ -10,9 +10,10 @@ function Ship() {
  const gameOver = useRecoilValue(gameOverState);
 
  const ship = useRef();
+ 
  useFrame(({ mouse }) => {
    setShipPosition({
-     position: { x: mouse.x * 6, y: mouse.y * 2, z: 0 },
+     position: { x: mouse.x * 4, y: mouse.y * 2, z: 0 },
      rotation: { x: -mouse.x * 0.5, y: -mouse.y * 0.2, z: -mouse.x * 0.5 }
    });
  });
