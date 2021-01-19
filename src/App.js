@@ -83,7 +83,8 @@ function App() {
   const [level, setLevel] = useState(1);
 
   return (
-      <Canvas 
+      <Canvas
+        camera={{ fov: 75 }}
         onCreated={({ gl }) => {
         gl.setClearColor(new THREE.Color('#000007'))
       }}>
