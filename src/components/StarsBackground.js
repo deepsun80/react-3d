@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
 
-function StarsBackground() {
+function StarsBackground({ speed }) {
  let group = useRef();
  let theta = 0;
 
@@ -12,7 +12,7 @@ function StarsBackground() {
 
    if (group && group.current) {
     group.current.scale.set(s, s, s);
-    group.current.position.z += 0.01;
+    group.current.position.z += speed;
    }
  });
 

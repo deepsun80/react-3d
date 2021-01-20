@@ -11,9 +11,9 @@ function EnemiesDestroyed() {
  useFrame(() => {
    if (enemyDestroyed && enemyDestroyed.current) {
     enemyDestroyed.current.material.opacity -= 0.05;
-    enemyDestroyed.current.scale.x += 0.05;
-    enemyDestroyed.current.scale.y += 0.05;
-    enemyDestroyed.current.scale.z += 0.05;
+    enemyDestroyed.current.scale.x += 0.1;
+    enemyDestroyed.current.scale.y += 0.1;
+    enemyDestroyed.current.scale.z += 0.1;
    }
  });
 

@@ -6,7 +6,7 @@ function LaserController() {
  const [lasers, setLasers] = useRecoilState(laserPositionState);
  return (
    <mesh
-     position={[0, 0, -8]}
+     position={[0, 0, 0]}
      onClick={() =>
        setLasers([
          ...lasers,

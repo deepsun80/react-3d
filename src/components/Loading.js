@@ -1,17 +1,17 @@
-function Loading() {
+import { Text } from 'drei';
+import fonts from '../fonts';
+
+function MissedText() {
  return (
-   <mesh visible position={[0, 0, 0]} rotation={[0, 0, 0]}>
-     <sphereGeometry attach="geometry" args={[1, 16, 16]} />
-     <meshStandardMaterial
-       attach="material"
-       color="white"
-       transparent
-       opacity={0.6}
-       roughness={1}
-       metalness={0}
-     />
-   </mesh>
+   <Text
+    color="white"
+    scale={[5, 5]}
+    position-z={1}
+    font={fonts.Orbitron}
+   >
+    LOADING...
+   </Text>
  );
 }
 
-export default Loading;
+export default MissedText;

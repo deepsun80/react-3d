@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 import { scoreState } from "../gameState";
 import { Text } from 'drei';
+import fonts from '../fonts';
 
-// Draws all of the lasers existing in state.
 function ScoreText({ txtPos }) {
  const score = useRecoilValue(scoreState);
  
@@ -12,6 +12,7 @@ function ScoreText({ txtPos }) {
    position-y={txtPos.y}
    position-x={txtPos.x}
    scale={[3, 3]}
+   font={fonts.Orbitron}
   >
    Score: {score}
   </Text>

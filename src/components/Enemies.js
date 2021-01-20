@@ -11,7 +11,7 @@ function Enemies() {
  return (
      enemies.map((enemy, id) => (
       <group key={`${id}`} >
-        <mesh position={[enemy.x, enemy.y, enemy.z]} scale={[2, 2, 2]} rotation={[0, enemy.yRotation, 0]} visible geometry={nodes.Low002_Cube015.geometry} material={nodes.Low002_Cube015.material}>
+        <mesh position={[enemy.x, enemy.y, enemy.z]} scale={[2, 2, 2]} rotation={[0, enemy.yRotation, 0]} visible geometry={nodes.Low002_Cube015.geometry} material={nodes.Low002_Cube015.material} castShadow receiveShadow>
         </mesh>
       </group>
      ))

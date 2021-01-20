@@ -1,11 +1,13 @@
 import { Text } from 'drei';
+import fonts from '../fonts';
 
 function MissedText() {
  return (
    <Text
-    color="red"
+    color="white"
     scale={[5, 5]}
     position-z={1}
+    font={fonts.Orbitron}
    >
     GAME OVER
    </Text>

@@ -1,17 +1,20 @@
 import { useRecoilValue } from "recoil";
-import { laserPositionState } from "../gameState";
+import { laserPositionState, gameOverState } from "../gameState";
 
 function Lasers() {
  const lasers = useRecoilValue(laserPositionState);
+ const gameOver = useRecoilValue(gameOverState);
+
  return (
+   !gameOver ? 
    <group>
      {lasers.map((laser) => (
        <mesh position={[laser.x, laser.y, laser.z]} key={`${laser.id}`}>
-         <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-         <meshStandardMaterial attach="material" emissive="white" />
+         <sphereBufferGeometry attach="geometry" args={[0.5, 12, 12]} />
+         <meshStandardMaterial attach="material" color="yellow" />
        </mesh>
      ))}
-   </group>
+   </group> : null
  );
 }
 

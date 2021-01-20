@@ -39,8 +39,8 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
 
   return (
     <>
-      <ambientLight intensity={1.5} />
-      <directionalLight intensity={2.0} />
+      <ambientLight intensity={1.0} />
+      <directionalLight intensity={1.5} castShadow position={[0, 1, 1]} />
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
       {gameOver && <GameOverText />}
@@ -50,7 +50,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         <Enemies />
         <Planets />
       </Suspense>
-      <StarsBackground />
+      <StarsBackground speed={0.01} />
       <EnemiesDestroyed />
       <Target />
       <Lasers />
@@ -84,7 +84,7 @@ function App() {
 
   return (
       <Canvas
-        camera={{ fov: 75 }}
+        shadowMap
         onCreated={({ gl }) => {
         gl.setClearColor(new THREE.Color('#000007'))
       }}>

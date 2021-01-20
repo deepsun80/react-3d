@@ -33,7 +33,7 @@ function Ship() {
 
  return (
    !gameOver ? 
-   <group ref={ship} scale={[0.3, 0.3, 0.3]}>
+   <group ref={ship} scale={[0.5, 0.5, 0.5]}>
      <mesh visible geometry={nodes.StarSparrow09.geometry} material={nodes.StarSparrow09.material}>
      </mesh>
    </group> : null

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useRef, } from 'react';
 import { useLoader, useFrame } from 'react-three-fiber';
-import earthTexture from '../images/earthTexture.jpeg'
+import earthTexture from '../images/earthTexture.jpg'
 import marsTexture from '../images/marsTexture.jpg';
 
 function Planets() {
