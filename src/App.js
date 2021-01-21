@@ -49,12 +49,12 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         <ShipDestroyed />
         <Enemies />
         <Planets />
+        <EnemiesDestroyed />
+        <Target />
+        <Lasers />
+        <LaserController />
       </Suspense>
       <StarsBackground speed={0.01} />
-      <EnemiesDestroyed />
-      <Target />
-      <Lasers />
-      <LaserController />
       <Effects />
       <GameLogic 
         getDistance={getDistance}

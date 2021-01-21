@@ -16,8 +16,8 @@ function LaserController() {
            y: 0,
            z: 0,
            velocity: [
-             shipPosition.rotation.x * 2,
-             shipPosition.rotation.y * 5,
+             shipPosition.rotation.x * 12,
+             shipPosition.rotation.y * 12,
            ],
          },
        ])

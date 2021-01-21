@@ -13,8 +13,8 @@ function Ship() {
  
  useFrame(({ mouse }) => {
    setShipPosition({
-     position: { x: mouse.x * 4, y: mouse.y * 2, z: 0 },
-     rotation: { x: -mouse.x * 0.5, y: -mouse.y * 0.2, z: -mouse.x * 0.5 }
+     position: { x: mouse.x * 4, y: mouse.y * 2, z: -4 },
+     rotation: { x: -mouse.x * 0.1, y: -mouse.y * 0.1, z: -mouse.x * 0.5 }
    });
  });
 
