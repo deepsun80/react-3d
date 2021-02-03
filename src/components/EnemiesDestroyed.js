@@ -3,6 +3,7 @@ import { useFrame } from "react-three-fiber";
 import { useRecoilValue } from "recoil";
 import { enemyDestroyedState } from "../gameState";
 
+
 function EnemiesDestroyed() {
  const enemiesDestroyed = useRecoilValue(enemyDestroyedState);
 
@@ -10,10 +11,10 @@ function EnemiesDestroyed() {
 
  useFrame(() => {
    if (enemyDestroyed && enemyDestroyed.current) {
-    enemyDestroyed.current.material.opacity -= 0.05;
-    enemyDestroyed.current.scale.x += 0.1;
-    enemyDestroyed.current.scale.y += 0.1;
-    enemyDestroyed.current.scale.z += 0.1;
+    enemyDestroyed.current.material.opacity -= 0.20;
+    enemyDestroyed.current.scale.x += 0.3;
+    enemyDestroyed.current.scale.y += 0.3;
+    enemyDestroyed.current.scale.z += 0.3;
    }
  });
 

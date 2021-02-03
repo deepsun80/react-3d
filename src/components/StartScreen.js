@@ -60,7 +60,7 @@ function StartScreen({ setGame, level, setNewLevel }) {
         >
           START
         </Text>
-        <RoundedBox args={[1.75, 0.5, 0]} position-y={level !== 1 ? .02 : -2.0}>
+        <RoundedBox args={[1.75, 0, 0.5]} castShadow receiveShadow position-y={level !== 1 ? .02 : -2.0} rotation={[-8, 0, 0]}>
           <meshBasicMaterial attach="material" color={hovered ? "grey" : "white"} />
         </RoundedBox>
       </group>
