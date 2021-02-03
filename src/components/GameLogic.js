@@ -86,7 +86,8 @@ function GameLogic({
      enemies
       .map((enemy, idx) => ({ x: enemy.x, y: enemy.y, z: enemy.z + enemySpeed, yRotation: enemy.yRotation }))
       .filter((enemy, idx) => !hitEnemies[idx])
-   );   
+   );
+   
    
    // Set missed number of enemies
    setMissed(
@@ -94,12 +95,17 @@ function GameLogic({
       .filter((enemy) => enemy.z >= 0)
    );
 
-   //If player hit display detroyed and set game over
+   //If player hit display ship detroyed, remove enemy, and set game over
    enemies
      .map((enemy, idx) => {
        if (getDistance(shipPosition.position, enemy) < distanceVar) {
         setGameOver(true);
+
         setShipDestroyed([{ x: shipPosition.position.x, y: shipPosition.position.y, z: shipPosition.position.z}]);
+
+        setEnemies(
+          enemies.filter((enemy, idxy) => idx === idxy)
+        );
 
         setTimeout(() => {
           setGame(false);
