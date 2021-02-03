@@ -5,7 +5,7 @@ import { getRandom } from "./helpers";
 const createEnemies = (max) => {
  let enemyArray = [];
  for (let i = 0; i < max; i ++) {
-  enemyArray = [{ x: getRandom(-20, 20), y: getRandom(-10, 10), z: getRandom(-20, -500), yRotation: getRandom(0, 180) }, ...enemyArray];
+  enemyArray = [{ x: 0, y: 0, z: getRandom(-20, -500), yRotation: getRandom(0, 180) }, ...enemyArray];
  }
  return enemyArray;
 }

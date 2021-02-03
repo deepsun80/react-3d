@@ -1,33 +1,60 @@
-import { useRef } from "react";
+import { useRef, useMemo, createRef } from "react";
 import { useFrame } from "react-three-fiber";
 import { useRecoilValue } from "recoil";
 import { enemyDestroyedState } from "../gameState";
+import * as THREE from 'three';
 
+function make(color, speed) {
+  return {
+    ref: createRef(),
+    color,
+    data: new Array(5)
+      .fill()
+      .map(() => [
+        new THREE.Vector3(),
+        new THREE.Vector3(-1 + Math.random() * 2, -1 + Math.random() * 2, -1 + Math.random() * 2).normalize().multiplyScalar(speed * 1.25)
+      ])
+  }
+}
+
+const dummy = new THREE.Object3D();
 
 function EnemiesDestroyed() {
  const enemiesDestroyed = useRecoilValue(enemyDestroyedState);
 
- const enemyDestroyed = useRef();
+ return enemiesDestroyed.map((enemy, id) => <Explosion key={`${id}`} position={enemy} />);
+}
 
- useFrame(() => {
-   if (enemyDestroyed && enemyDestroyed.current) {
-    enemyDestroyed.current.material.opacity -= 0.20;
-    enemyDestroyed.current.scale.x += 0.3;
-    enemyDestroyed.current.scale.y += 0.3;
-    enemyDestroyed.current.scale.z += 0.3;
-   }
- });
+function Explosion({position}) {
+  const explosion = useRef();
+  const particles = useMemo(() => [make('yellow', 0.8), make('red', 0.6)], []);
 
- return (
-   <group>
-     {enemiesDestroyed.map((enemy, id) => (
-       <mesh position={[enemy.x, enemy.y, enemy.z]} key={`${id}`} ref={enemyDestroyed}>
-         <sphereBufferGeometry attach="geometry" args={[2, 20,20]} />
-         <meshStandardMaterial attach="material" color="red" transparent depthWrite={false} />
-       </mesh>
-     ))}
-   </group>
- );
+  useFrame(() => {
+    if(explosion && explosion.current) {
+      particles.forEach(({ data }, type) => {
+        const mesh = explosion.current.children[type];
+        data.forEach(([vec, normal], i) => {
+          vec.add(normal)
+          dummy.position.copy(vec)
+          dummy.updateMatrix()
+          mesh.setMatrixAt(i, dummy.matrix)
+        })
+        mesh.material.opacity -= 0.025
+        mesh.instanceMatrix.needsUpdate = true
+      })
+    }
+  });
+
+  return (
+    <group ref={explosion} position={[position.x, position.y, position.z]} scale={[0.25, 0.25, 0.25]}>
+      {particles.map(({ color, data }, index) => (
+        <instancedMesh key={index} args={[null, null, data.length]} frustumCulled={false}>
+          <sphereBufferGeometry attach="geometry" args={[10, 10, 16]} />
+          <meshBasicMaterial attach="material" color={color} transparent opacity={1} />
+        </instancedMesh>
+      ))}
+    </group>
+  );
 }
 
 export default EnemiesDestroyed;

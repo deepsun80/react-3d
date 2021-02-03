@@ -60,7 +60,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         getDistance={getDistance}
         distanceVar={3} 
         enemySpeed={
-          level === 1 ? ENEMY_SPEED.level1 :
+          level === 1 ? ENEMY_SPEED.level3 :
           level === 2 ? ENEMY_SPEED.level2 :
           level === 3 ? ENEMY_SPEED.level3 :
           level === 4 ? ENEMY_SPEED.level4 :
