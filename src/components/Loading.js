@@ -5,7 +5,7 @@ function MissedText() {
  return (
    <Text
     color="white"
-    scale={[5, 5]}
+    scale={[3.5, 3.5]}
     position-z={1}
     font={fonts.Orbitron}
    >

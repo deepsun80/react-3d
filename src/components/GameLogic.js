@@ -37,13 +37,13 @@ function GameLogic({
 
   useEffect(() => {
    // Game over 
-   if (missed.length >= 10) {
-    setGameOver(true);
+  //  if (missed.length >= 10) {
+  //   setGameOver(true);
 
-    setTimeout(() => {
-      setGame(false);
-    }, 2000);
-   }
+  //   setTimeout(() => {
+  //     setGame(false);
+  //   }, 2000);
+  //  }
 
    if(score >= 30) {
      setNewLevel(false);
@@ -104,7 +104,7 @@ function GameLogic({
         setShipDestroyed([{ x: shipPosition.position.x, y: shipPosition.position.y, z: shipPosition.position.z}]);
 
         setEnemies(
-          enemies.filter((enemy, idxy) => idx === idxy)
+          enemies.filter((enemy, idxy) => idx !== idxy)
         );
 
         setTimeout(() => {

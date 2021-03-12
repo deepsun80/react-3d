@@ -1,4 +1,5 @@
 import Effects from './Effects';
+import EndScreen from './EndScreen';
 import Enemies from './Enemies';
 import EnemiesDestroyed from './EnemiesDestroyed';
 import GameLogic from './GameLogic';
@@ -17,6 +18,7 @@ import Target from './Target';
 
 export {
  Effects,
+ EndScreen,
  Enemies,
  EnemiesDestroyed,
  GameLogic,

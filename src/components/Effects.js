@@ -8,7 +8,7 @@ import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 
 extend({ EffectComposer, ShaderPass, RenderPass, UnrealBloomPass, FilmPass });
 
-function Effects() {
+function Effects({ brightness }) {
   const composer = useRef();
 
   const { scene, gl, size, camera } = useThree();
@@ -28,7 +28,7 @@ function Effects() {
   return (
     <effectComposer ref={composer} args={[gl]}>
       <renderPass attachArray="passes" scene={scene} camera={camera} />
-      <unrealBloomPass attachArray="passes" args={[undefined, 1, 1, 0]} />
+      <unrealBloomPass attachArray="passes" args={[undefined, brightness, 1, 0]} />
     </effectComposer>
   )
 }

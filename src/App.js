@@ -39,7 +39,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
 
   return (
     <>
-      <ambientLight intensity={1.0} />
+      <ambientLight intensity={2.0} />
       <directionalLight intensity={1.5} castShadow position={[0, 1, 1]} />
       <MissedText txtPos={TEXT_POS} />
       <ScoreText txtPos={TEXT_POS} />
@@ -55,12 +55,12 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         <LaserController />
       </Suspense>
       <StarsBackground speed={0.01} />
-      <Effects />
+      <Effects brightness={1.0} />
       <GameLogic 
         getDistance={getDistance}
         distanceVar={3} 
         enemySpeed={
-          level === 1 ? ENEMY_SPEED.level3 :
+          level === 1 ? ENEMY_SPEED.level1 :
           level === 2 ? ENEMY_SPEED.level2 :
           level === 3 ? ENEMY_SPEED.level3 :
           level === 4 ? ENEMY_SPEED.level4 :
