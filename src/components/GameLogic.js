@@ -37,13 +37,13 @@ function GameLogic({
 
   useEffect(() => {
    // Game over 
-  //  if (missed.length >= 10) {
-  //   setGameOver(true);
+   if (missed.length >= 10) {
+    setGameOver(true);
 
-  //   setTimeout(() => {
-  //     setGame(false);
-  //   }, 2000);
-  //  }
+    setTimeout(() => {
+      setGame(false);
+    }, 2000);
+   }
 
    if(score >= 30) {
      setNewLevel(false);
