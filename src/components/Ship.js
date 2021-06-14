@@ -5,8 +5,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { shipPositionState, gameOverState } from "../gameState";
 import * as THREE from 'three';
 
-const clock = new THREE.Clock(false);
-
 function Ship() {
  const [shipPosition, setShipPosition] = useRecoilState(shipPositionState);
  const gameOver = useRecoilValue(gameOverState);

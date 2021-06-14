@@ -1,6 +1,7 @@
 import { useState, Suspense } from 'react';
 import { Canvas } from "react-three-fiber";
 import { RecoilRoot, useRecoilValue } from "recoil";
+// import { OrbitControls } from 'drei';
 import * as THREE from 'three';
 
 import {
@@ -73,6 +74,7 @@ function Scene({ setGame, setNewLevel, setLevel, level }) {
         setLevel={setLevel}
         level={level}
       />
+      {/* <OrbitControls /> */}
     </>
   );
 }
