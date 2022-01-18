@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text } from 'drei';
+import { Text } from '@react-three/drei';
 import StarsBackground from './StarsBackground';
 import Effects from './Effects';
 import fonts from '../fonts';

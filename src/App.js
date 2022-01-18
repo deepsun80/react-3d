@@ -1,7 +1,7 @@
 import { useState, Suspense } from 'react';
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import { RecoilRoot, useRecoilValue } from "recoil";
-// import { OrbitControls } from 'drei';
+// import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 import {

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { useRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRecoilValue } from "recoil";
 import { gameOverState } from "../gameState";
 

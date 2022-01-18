@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 
 // A Ground plane that moves relative to the player. The player stays at 0,0
 function Terrain({ groundSpeed, groundHeight }) {

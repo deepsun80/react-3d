@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Text, RoundedBox } from 'drei';
+import { Text, RoundedBox } from '@react-three/drei';
 import StarsBackground from './StarsBackground';
-import Title from './Title';
+// import Title from './Title';
 import Effects from './Effects';
 import EndScreen from './EndScreen';
 import * as THREE from 'three';
@@ -30,7 +30,15 @@ function StartScreen({ setGame, level, setNewLevel }) {
       <>
         <ambientLight intensity={0.1} />
         <directionalLight intensity={1.0} castShadow position={[0, 0, 1]} />
-        <Title position={[-7.75, 7.5, -10]} />
+        <Text
+            color="white"
+            scale={[2.5, 2.5]}
+            position-z={1}
+            position-y={2.3}
+            font={fonts.Orbitron}
+        >
+            VENUS MINEFEILD
+        </Text>
         {level === 1 && 
           <Text
             color="white"

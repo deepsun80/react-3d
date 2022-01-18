@@ -1,5 +1,5 @@
 import { useRef, useMemo, createRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRecoilValue } from "recoil";
 import { shipDestroyedState } from "../gameState";
 import * as THREE from 'three';

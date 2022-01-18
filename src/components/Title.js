@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import OrbitronExtraBold from '../fonts/OrbitronExtraBold.json';
 
 function Title({position}) {
- const font = new THREE.FontLoader().parse(OrbitronExtraBold);
+ const font = new THREE.FontLoader().load(OrbitronExtraBold);
 
  const textOptions = {
    font,

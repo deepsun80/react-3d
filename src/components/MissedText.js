@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { missedEnemiesState } from "../gameState";
-import { Text } from 'drei';
+import { Text } from '@react-three/drei';
 import fonts from '../fonts';
 
 function MissedText({ txtPos }) {

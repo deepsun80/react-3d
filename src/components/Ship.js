@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useFrame, useLoader } from "react-three-fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { shipPositionState, gameOverState } from "../gameState";

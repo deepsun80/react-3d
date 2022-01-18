@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRecoilState } from "recoil";
 import {
  // gameState, 
